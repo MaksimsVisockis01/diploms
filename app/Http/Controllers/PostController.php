@@ -17,7 +17,7 @@ class PostController extends Controller
     public function store(){
         return 'Запрос создания постов';
     }
-    public function show($post){//при передаче значения через route laravel дает сразу параметр с ссылки, пожтому можно это значение получить и применить
+    public function show($post){//при передаче значения через route laravel дает сразу параметр с ссылки, поэтому можно это значение получить и применить
         return "Страница просмотра поста {$post}";//отобразив его здесь
     }
     public function edit(){
