@@ -24,7 +24,7 @@ Route::get('/test', TestController::class);
 
 
 
-Route::resource('posts/{post}/comments', CommentController::class);
+Route::resource('posts/{post}/comments', CommentController::class); //test
 
 
 

@@ -10,31 +10,31 @@
      <form action="{{ route('register.store') }}" method="POST">
          {{ csrf_field() }}
          <div class="txt_field">
-             <input type="text" name="name" required>
+             <input name="name" required>
              <span></span>
              <label>Name</label>
          </div>
          <div class="txt_field">
-             <input type="text" name="email" required>
+             <input type="email" name="email" required>
              <span></span>
              <label>Email</label>
          </div>
          <div class="txt_field">
-             <input type="text" name="uid" required>
+             <input name="uid" required>
              <span></span>
              <label>Username</label>
          </div>
          <div class="txt_field">
-         <input type="password" name="pwd" required>
+         <input type="password" name="password" required>
              <span></span>
              <label>Password</label>
          </div>
          <div class="txt_field">
-         <input type="password" name="pwdrepeat" required>
+         <input type="password" name="password_repeat" required>
              <span></span>
              <label>Repeat Password</label>
          </div>
-         <button onclick="Sign()" id="signupButton" type="submit" name="submit">Sign up</button>
+         <button type="submit">Sign up</button>
      </form>
 </section>
 @endsection

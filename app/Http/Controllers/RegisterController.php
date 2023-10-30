@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Hash;
 
 class RegisterController extends Controller
 {
@@ -11,15 +13,24 @@ class RegisterController extends Controller
     }
 
     public function store(Request $request){
-        
-        $name = $request->input('name');
-        $email = $request->input('email');
-        $uid = $request->input('uid');
-        $pwd = $request->input('pwd');
-        $pwdrepeat = $request->input('pwdrepeat');
 
-        //dd($request);
+        $validated = $request->validate([
+            'name'=> ['required', 'string','max:20'],
+            'email'=> ['required', 'string','max:30', 'email', 'unique:users'],
+            'uid'=> ['required', 'string','max:30', 'unique:users'],
+            'password'=> ['required', 'string','min:7','max:30', 'confirmed'],
+        ]);
 
-        
+        $user = new User;
+
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->uid = $validated['uid'];
+        $user->password = Hash::make($validated['password']);
+        $user->save();
+
+        // return redirect()->route('/');
+
+        // Вместо этого, возвращаем null или void
     }
 }
