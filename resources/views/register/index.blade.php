@@ -52,7 +52,7 @@
                         <div class="error">{{ $errors->first('password_confirmation') }}</div>
                     @endif 
 
-         <button type="submit">Sign up</button>
+         <button type="submit">Register</button>
      </form>
 
     @if (session('status'))

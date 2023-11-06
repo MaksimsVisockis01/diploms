@@ -11,10 +11,13 @@ class LoginController extends Controller
     }
     public function store(Request $request){
         
-        $uid = $request->input('uid');
-        $pwd = $request->input('pwd');
-
-        //dd($request);
+        $credentials = $request->only('uid', 'password');
+    
+        if (auth()->attempt($credentials)) {
+            return redirect()->intended('user');
+        }
+        
+        return back()->withErrors(['uid' => 'wrond username', 'password' => 'wrond password']);
 
         
     }

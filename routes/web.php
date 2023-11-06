@@ -28,15 +28,15 @@ Route::resource('posts/{post}/comments', CommentController::class);
 
 
 
-// Route::redirect('/home', '/'); //переадресует с определенной адресной строки на другую(в данном случае с /home  на главную)
-//middleware('guest')->
-// Route::group(function () {
+Route::redirect('/home', '/'); //переадресует с определенной адресной строки на другую(в данном случае с /home  на главную)
+
+Route::middleware('guest')->group(function () {
 
      Route::get('register', [RegisterController::class, 'index'])->name('register');
      Route::post('register', [RegisterController::class, 'store'])->name('register.store');
 
      Route::get('login', [LoginController::class, 'index'])->name('login');
      Route::post('login', [LoginController::class, 'store'])->name('login.store');
-// });
-//user
+});
+
 

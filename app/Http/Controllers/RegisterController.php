@@ -24,7 +24,7 @@ class RegisterController extends Controller
 
         
 
-        $user = User::create([
+        $user = User::query()->create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'uid' => $validated['uid'],
@@ -33,7 +33,7 @@ class RegisterController extends Controller
 
         
 
-        return redirect()->route('test');
+        return redirect()->route('user');
     
 
 
