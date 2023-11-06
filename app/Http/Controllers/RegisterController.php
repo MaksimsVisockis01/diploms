@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Hash;
+use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
@@ -18,19 +19,44 @@ class RegisterController extends Controller
             'name'=> ['required', 'string','max:20'],
             'email'=> ['required', 'string','max:30', 'email', 'unique:users'],
             'uid'=> ['required', 'string','max:30', 'unique:users'],
-            'password'=> ['required', 'string','min:7','max:30', 'confirmed'],
+            'password' => ['required', 'string', 'min:7', 'max:30', 'confirmed'],
         ]);
 
-        $user = new User;
+        
 
-        $user->name = $validated['name'];
-        $user->email = $validated['email'];
-        $user->uid = $validated['uid'];
-        $user->password = Hash::make($validated['password']);
-        $user->save();
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'uid' => $validated['uid'],
+            'password' => Hash::make($validated['password']),
+        ]);
 
-        // return redirect()->route('/');
+        
 
-        // Вместо этого, возвращаем null или void
+        return redirect()->route('test');
+    
+
+
+
+        // var_dump($validated);
+        // exit;
+
+        // User::create([
+        //     'name' => $validated['name'],
+        //     'email' => $validated['email'],
+        //     'uid' => $validated['uid'],
+        //     'password' => Hash::make($validated['password']),
+        // ]);
+
+        // \Log::info('Данные для сохранения', $validated);
+
+        // if ($user) {
+        //     return redirect('/');
+        // } else {
+        //     // Ошибка при сохранении
+        //     Log::error('Ошибка при сохранении данных');
+        // }
+        
+
     }
 }

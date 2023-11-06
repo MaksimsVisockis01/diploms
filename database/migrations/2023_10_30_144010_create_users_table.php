@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('uid')->unique(); // username
             
             $table->string('password');
-            $table->rememberToken();
+            // $table->rememberToken();
 
 
         });

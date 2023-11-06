@@ -114,7 +114,7 @@ return [
 
         'errorlog' => [
             'driver' => 'errorlog',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => env('LOG_LEVEL', 'info'),
             'replace_placeholders' => true,
         ],
 

@@ -17,26 +17,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home.index');
 
-Route::get('/test', TestController::class);
+Route::get('test', TestController::class)->name('test');
 
 
 
 
 
 
-Route::resource('posts/{post}/comments', CommentController::class); //test
+Route::resource('posts/{post}/comments', CommentController::class);
 
 
 
 // Route::redirect('/home', '/'); //переадресует с определенной адресной строки на другую(в данном случае с /home  на главную)
-
-Route::middleware('guest')->group(function () {
+//middleware('guest')->
+// Route::group(function () {
 
      Route::get('register', [RegisterController::class, 'index'])->name('register');
      Route::post('register', [RegisterController::class, 'store'])->name('register.store');
 
      Route::get('login', [LoginController::class, 'index'])->name('login');
      Route::post('login', [LoginController::class, 'store'])->name('login.store');
-});
+// });
 //user
 
