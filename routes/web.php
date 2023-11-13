@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::view('/', 'home.index');
+Route::view('/', 'home.index')->name('/');
 
 Route::get('test', TestController::class)->name('test');
 Route::resource('posts/{post}/comments', CommentController::class);
-Route::redirect('/home', '/'); //переадресует с определенной адресной строки на другую(в данном случае с /home  на главную)
+Route::redirect('/home', '/')->name('home'); //переадресует с определенной адресной строки на другую(в данном случае с /home  на главную)
 
 Route::middleware('guest')->group(function () {
 
