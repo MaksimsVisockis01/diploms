@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -31,32 +32,13 @@ class RegisterController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
+        if ($user->admin) {
+            Session::put('admin_id', $user->id);
+        }else{
+            Session::put('user_id', $user->id);
+        }
         
 
-        return redirect()->route('user');
-    
-
-
-
-        // var_dump($validated);
-        // exit;
-
-        // User::create([
-        //     'name' => $validated['name'],
-        //     'email' => $validated['email'],
-        //     'uid' => $validated['uid'],
-        //     'password' => Hash::make($validated['password']),
-        // ]);
-
-        // \Log::info('Данные для сохранения', $validated);
-
-        // if ($user) {
-        //     return redirect('/');
-        // } else {
-        //     // Ошибка при сохранении
-        //     Log::error('Ошибка при сохранении данных');
-        // }
-        
-
+        return redirect()->route('home');
     }
 }

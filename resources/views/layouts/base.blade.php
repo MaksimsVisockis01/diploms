@@ -1,7 +1,3 @@
-@php
-  session_start();
-@endphp
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -20,9 +16,9 @@
         <li class="item"><a href="#">Forum</a></li>
         <li class="item"><a href="#">Services</a></li>
 
-        @if(session('userid'))
+        @if(session('user_id'))
             <li class="item button secondary"><a href="{{ route('logout') }}">Logout</a></li>
-        @elseif(session('adminid'))
+        @elseif(session('admin_id'))
             <li class="item"><a href="{{ route('users') }}">User Ctrl</a></li>
             <li class="item"><a href="{{ route('gameAdd') }}">Add Game</a></li>
             <li class="item"><a href="{{ route('gameList') }}">Game List</a></li>
@@ -31,6 +27,7 @@
             <li class="item button"><a href="{{ route('login') }}">Log In</a></li>
             <li class="item button secondary"><a href="{{ route('register') }}">Sign Up</a></li>
         @endif
+
 
         <li class="toggle"><span class="bars"></span></li>
     </ul>
