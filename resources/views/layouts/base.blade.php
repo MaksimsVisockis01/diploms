@@ -19,9 +19,9 @@
         @if(session('user_id'))
             <li class="item button secondary"><a href="{{ route('logout') }}">Logout</a></li>
         @elseif(session('admin_id'))
-            <li class="item"><a href="{{ route('users') }}">User Ctrl</a></li>
+            {{-- <li class="item"><a href="{{ route('users') }}">User Ctrl</a></li>
             <li class="item"><a href="{{ route('gameAdd') }}">Add Game</a></li>
-            <li class="item"><a href="{{ route('gameList') }}">Game List</a></li>
+            <li class="item"><a href="{{ route('gameList') }}">Game List</a></li> --}}
             <li class="item button secondary"><a href="{{ route('logout') }}">Logout</a></li>
         @else
             <li class="item button"><a href="{{ route('login') }}">Log In</a></li>
