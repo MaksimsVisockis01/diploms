@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Forum\DashboardController;
+use App\Http\Controllers\Forum\QuestionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PostController;
@@ -8,6 +10,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TestController;
 use App\Http\Middleware\LogMiddleware;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use Termwind\Question;
 
 
 
@@ -31,7 +35,14 @@ Route::middleware('guest')->group(function () {
      Route::get('login', [LoginController::class, 'index'])->name('login');
      Route::post('login', [LoginController::class, 'store'])->name('login.store');
 });
-Route::get('logout', [LogoutController::class, 'index'])->name('logout');
+Route::middleware('auth')->group(function () {
 
+     Route::get('logout', [LogoutController::class, 'index'])->name('logout');
+
+     Route::get('forum/question', [QuestionController::class, 'index'])->name('question');
+
+});
+
+Route::get('forum/dashboard', [DashboardController::class, 'index'])->name('forum');
 
 

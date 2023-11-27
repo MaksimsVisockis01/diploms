@@ -14,11 +14,11 @@
    ul {
      list-style-type: none;
    }
-   a {
+   .nav {
      color: white;
      text-decoration: none;
    }
-   a:hover {
+   .nav:hover {
      text-decoration: none;
      color: #999;
    }
