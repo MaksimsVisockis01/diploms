@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -13,12 +15,18 @@ class LoginController extends Controller
         
         $credentials = $request->only('uid', 'password');
     
-        if (auth()->attempt($credentials)) {
-            return redirect()->intended('user');
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            if ($user->admin) {
+                Session::put('admin_id', $user->id);
+            }else{
+                Session::put('user_id', $user->id);
+            }
+
+            return redirect()->route('home');
         }
         
         return back()->withErrors(['uid' => 'wrond username', 'password' => 'wrond password']);
-
-        
     }
 }
