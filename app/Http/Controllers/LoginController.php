@@ -13,9 +13,9 @@ class LoginController extends Controller
     }
     public function store(Request $request){
         
-        $credentials = $request->only('uid', 'password');
+        $data = $request->only('uid', 'password');
     
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($data)) {
             $user = Auth::user();
 
             if ($user->admin) {

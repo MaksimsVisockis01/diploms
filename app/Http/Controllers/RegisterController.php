@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -35,7 +36,8 @@ class RegisterController extends Controller
         }else{
             Session::put('user_id', $user->id);
         }
-        
+
+        Auth::login($user);
 
         return redirect()->route('/');
     }

@@ -11,21 +11,21 @@
 
 <nav>
     <ul class="menu">
-        <li class="logo"><a href="/">Logo</a></li>
-        <li class="item"><a href="#">About</a></li>
-        <li class="item"><a href="#">Forum</a></li>
-        <li class="item"><a href="#">Services</a></li>
+        <li class="logo"><a class="nav" href="/">Logo</a></li>
+        <li class="item"><a class="nav" href="#">About</a></li>
+        <li class="item"><a class="nav" href="{{ route('forum') }}">Forum</a></li>
+        <li class="item"><a class="nav" href="#">Services</a></li>
 
         @if(session('user_id'))
-            <li class="item button secondary"><a href="{{ route('logout') }}">Logout</a></li>
+            <li class="item button secondary"><a class="nav" href="{{ route('logout') }}">Logout</a></li>
         @elseif(session('admin_id'))
-            <li class="item"><a href="{{ route('users') }}">User Ctrl</a></li>
-            <li class="item"><a href="{{ route('gameAdd') }}">Add Game</a></li>
-            <li class="item"><a href="{{ route('gameList') }}">Game List</a></li>
-            <li class="item button secondary"><a href="{{ route('logout') }}">Logout</a></li>
+            {{-- <li class="item"><a class="nav" href="{{ route('users') }}">User Ctrl</a></li>
+            <li class="item"><a class="nav" href="{{ route('gameAdd') }}">Add Game</a></li>
+            <li class="item"><a class="nav" href="{{ route('gameList') }}">Game List</a></li> --}}
+            <li class="item button secondary"><a class="nav" href="{{ route('logout') }}">Logout</a></li>
         @else
-            <li class="item button"><a href="{{ route('login') }}">Log In</a></li>
-            <li class="item button secondary"><a href="{{ route('register') }}">Sign Up</a></li>
+            <li class="item button"><a class="nav" href="{{ route('login') }}">Log In</a></li>
+            <li class="item button secondary"><a class="nav" href="{{ route('register') }}">Sign Up</a></li>
         @endif
 
 
