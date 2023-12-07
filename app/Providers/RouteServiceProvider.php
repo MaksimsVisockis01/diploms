@@ -37,6 +37,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(function(){
                     require_once base_path('routes/web.php');
                     require_once base_path('routes/user.php');//можно разделить файлы на разные азы, как, например, в этом примере сделать еще user.php и туда запихать функции
+                    require_once base_path('routes/forum.php');
                 });
         });
     }

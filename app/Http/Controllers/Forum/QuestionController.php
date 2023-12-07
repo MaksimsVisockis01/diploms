@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Forum;
 
+use App\Models\Question;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,30 @@ class QuestionController extends Controller
 
     public function store(Request $request)
     {
-        //
+
+        if(auth()->check()){
+            $validated = $request->validate([
+                'title' =>['required', 'string','max:50'],
+                'content' => ['required', 'string'],
+            ]);
+    
+            $user = auth()->user();
+
+            if ($user) {
+                $userId = $user->id;
+
+                $question = Question::create([
+                    'user_id' => $userId,
+                    'title' => $validated['title'],
+                    'content' => $validated['content'],
+                ]);
+            
+                return redirect()->route('forum')->with('status', 'Question created successfully!');
+            }
+        }   else{
+            return redirect()->route('forum')->with('status', 'Failed');
+        }
+        
     }
 
     /**
