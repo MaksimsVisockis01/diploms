@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-12-11T18:30:41.131Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 OPR/104.0.0.0" etag="clzf9p-tEG-h0NfROmI0" version="22.1.7" type="github">
+<mxfile host="app.diagrams.net" modified="2023-12-11T18:32:42.760Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 OPR/104.0.0.0" etag="HYVoWH1y316mOvJNeMUX" version="22.1.7" type="github">
   <diagram name="Страница — 1" id="7GDDD2YCe5ZTX53e23Cu">
     <mxGraphModel dx="1161" dy="632" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -349,19 +349,19 @@
             <mxPoint x="1535" y="179" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="TRxBmE7X3QAa20zUCKPi-99" value="Jauna lietotāja reģistrācija" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="TRxBmE7X3QAa20zUCKPi-99" value="Jauna lietotāja reģistrācija" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
           <mxGeometry x="946" y="259" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="TRxBmE7X3QAa20zUCKPi-100" value="Lietotāja autorizācija" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="946" y="329" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="TRxBmE7X3QAa20zUCKPi-101" value="Lietotāju bloķēšana" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="TRxBmE7X3QAa20zUCKPi-101" value="Lietotāju bloķēšana" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
           <mxGeometry x="946" y="399" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="TRxBmE7X3QAa20zUCKPi-102" value="Lietotāju profila rediģēšana" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="946" y="469" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="TRxBmE7X3QAa20zUCKPi-103" value="Jautājuma izveidošana" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="TRxBmE7X3QAa20zUCKPi-103" value="Jautājuma izveidošana" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
           <mxGeometry x="1126" y="259" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="TRxBmE7X3QAa20zUCKPi-104" value="Jautājuma dzēšana" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -373,7 +373,7 @@
         <mxCell id="TRxBmE7X3QAa20zUCKPi-106" value="Jautājuma pārskats" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1126" y="469" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="TRxBmE7X3QAa20zUCKPi-107" value="Komentāru izveidošana" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="TRxBmE7X3QAa20zUCKPi-107" value="Komentāru izveidošana" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
           <mxGeometry x="1300" y="259" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="TRxBmE7X3QAa20zUCKPi-108" value="Komentāru dzēšana" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -385,7 +385,7 @@
         <mxCell id="TRxBmE7X3QAa20zUCKPi-110" value="Komentāru pārskats" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1300" y="469" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="TRxBmE7X3QAa20zUCKPi-111" value="Gramatu/failu lejuplādēšana" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="TRxBmE7X3QAa20zUCKPi-111" value="Gramatu/failu lejuplādēšana" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
           <mxGeometry x="1470" y="259" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="TRxBmE7X3QAa20zUCKPi-112" value="Gramatu/failu dzēšana" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
