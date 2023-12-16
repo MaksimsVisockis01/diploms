@@ -14,12 +14,17 @@ class Question extends Model
     ];
 
     protected $fillable = [
-        'user_id','title', 'content',
+        'user_id','title', 'content','published_at',
     ];
 
     
     protected $hidden = [
         'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
 }

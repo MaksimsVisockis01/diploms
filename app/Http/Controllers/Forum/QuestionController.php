@@ -36,6 +36,7 @@ class QuestionController extends Controller
                     'user_id' => $userId,
                     'title' => $validated['title'],
                     'content' => $validated['content'],
+                    'published_at' => now(),
                 ]);
             
                 return redirect()->route('forum')->with('status', 'Question created successfully!');
@@ -49,9 +50,11 @@ class QuestionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $question = Question::with('user')->findOrFail($id); 
+
+        return view('forum.question.show', compact('question'));
     }
 
     /**

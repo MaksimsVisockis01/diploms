@@ -16,4 +16,6 @@ Route::prefix('forum')->group(function () {
      });
 
      Route::get('dashboard', [DashboardController::class, 'index'])->name('forum');
+
+     Route::get('question/{id}', [QuestionController::class, 'show'])->name('question.show');
 });

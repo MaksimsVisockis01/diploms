@@ -1,0 +1,59 @@
+.forum-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.question-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.question-item {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.question-header {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.user-id, .title {
+    margin-right: 10px;
+}
+
+.question-content {
+    margin-bottom: 10px;
+}
+
+.content-label {
+    font-weight: bold;
+}
+
+.content {
+    margin-top: 5px;
+}
+
+.question-footer {
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+.published-date-label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.published-date {
+    margin-right: 10px;
+}
+
+.view-question-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.view-question-link:hover {
+    text-decoration: underline;
+}
