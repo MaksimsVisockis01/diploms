@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/forumindex.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/comment.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/question_show.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/comment_form.css') }}">
 </head>
 <body>
 

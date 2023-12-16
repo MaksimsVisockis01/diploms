@@ -13,11 +13,10 @@
             @foreach($questions as $question)
                 <li class="question-item">
                     <div class="question-header">
-                        <strong class="user-id">User ID:</strong> {{ $question->user->uid }}
+                        <strong class="user-id">User:</strong> {{ $question->user->uid }}
                         <strong class="title">Title:</strong> {{ $question->title }}
                     </div>
                     <div class="question-content">
-                        <strong class="content-label">Content:</strong>
                         <p class="content">
                             {{ strlen($question->content) > 100 ? substr($question->content, 0, 100) . '...' : $question->content }}
                         </p>

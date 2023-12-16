@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\Forum\DashboardController;
 use App\Http\Controllers\Forum\QuestionController;
-use App\Http\Controllers\Posts\CommentController;
+use App\Http\Controllers\Forum\CommentController;
 use App\Http\Middleware\LogMiddleware;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Termwind\Question;
+
 
 Route::prefix('forum')->group(function () {
      
@@ -18,4 +19,6 @@ Route::prefix('forum')->group(function () {
      Route::get('dashboard', [DashboardController::class, 'index'])->name('forum');
 
      Route::get('question/{id}', [QuestionController::class, 'show'])->name('question.show');
+
+     Route::post('question/{id}/comments', [CommentController::class, 'store'])->name('question.comment.store');
 });

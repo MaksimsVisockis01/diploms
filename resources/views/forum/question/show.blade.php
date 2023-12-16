@@ -9,10 +9,9 @@
         <h2>Question Details</h2>
 
         <div class="question-details">
-            <strong class="user-id">User ID:</strong> {{ $question->user->uid }}
+            <strong class="user-id">User:</strong> {{ $question->user->uid }}
             <strong class="title">Title:</strong> {{ $question->title }}
             
-            <strong class="content-label">Content:</strong>
             <p class="content">{{ $question->content }}</p>
 
             <strong class="published-date-label">Published at:</strong>
@@ -26,5 +25,12 @@
         </div>
 
         <a href="{{ route('forum') }}" class="back-to-forum-link">Back to Forum</a>
+
+        @if(session('user_id'))
+            @include('forum.comment.form')
+        @endif
+
+        @include('forum.comment.list')
+
     </div>
 @endsection

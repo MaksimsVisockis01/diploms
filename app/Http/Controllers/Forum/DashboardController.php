@@ -15,6 +15,4 @@ class DashboardController extends Controller
         return view('forum.index', compact('questions'));
 
     }
-    
-
 }

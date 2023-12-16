@@ -1,0 +1,31 @@
+.comment-list-container {
+     margin-top: 20px;
+ }
+ 
+ .comment-list {
+     list-style-type: none;
+     padding: 0;
+ }
+ 
+ .comment-item {
+     border: 1px solid #ccc;
+     margin-bottom: 15px;
+     padding: 10px;
+ }
+ 
+ .comment-header {
+     font-weight: bold;
+ }
+ 
+ .comment-content {
+     margin-top: 10px;
+ }
+ 
+ .published-date-label {
+     font-weight: bold;
+     margin-right: 5px;
+ }
+ 
+ .published-date {
+     color: #555;
+ }
