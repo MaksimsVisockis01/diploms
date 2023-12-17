@@ -13,9 +13,15 @@ class FilesController extends Controller
      */
     public function index()
     {
-        return view('files.dashboard');
+        $files = File::all();
+        return view('files.index', compact('files'));
     }
 
+    public function dashboard()
+    {
+        $files = File::all(); 
+        return view('files.dashboard', compact('files'));
+    }
     /**
      * Show the form for creating a new resource.
      */

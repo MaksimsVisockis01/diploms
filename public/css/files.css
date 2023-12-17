@@ -1,0 +1,107 @@
+.alert {
+     margin-bottom: 20px;
+     padding: 15px;
+     border: 1px solid transparent;
+     border-radius: 5px;
+ }
+
+ .alert-danger {
+     color: #721c24;
+     background-color: #f8d7da;
+     border-color: #f5c6cb;
+ }
+
+ .file-upload-container {
+     margin-top: 20px;
+     padding: 20px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     background-color: #f9f9f9;
+ }
+
+ .form-group {
+     margin-bottom: 15px;
+ }
+
+ label {
+     display: block;
+     font-weight: bold;
+     margin-bottom: 5px;
+ }
+
+ input[type="text"],
+ textarea {
+     width: 100%;
+     padding: 10px;
+     border: 1px solid #ddd;
+     border-radius: 5px;
+     box-sizing: border-box;
+ }
+
+ textarea {
+     resize: vertical;
+ }
+
+ input[type="file"] {
+     margin-top: 5px;
+ }
+
+ button {
+     padding: 10px 15px;
+     background-color: #007bff;
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+ }
+
+ button:hover {
+     background-color: #0056b3;
+ }
+
+ p {
+     margin-top: 20px;
+     color: #555;
+ }
+
+ .file-list-container {
+     margin-top: 20px;
+     padding: 20px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     background-color: #f9f9f9;
+ }
+
+ .file-list {
+     list-style-type: none;
+     padding: 0;
+ }
+
+ .file-item {
+     margin-bottom: 20px;
+     padding: 15px;
+     border: 1px solid #ddd;
+     border-radius: 5px;
+     background-color: #fff;
+ }
+
+ .title,
+ .author {
+     font-weight: bold;
+     color: #333;
+ }
+
+ .description {
+     color: #555;
+ }
+
+ .download-link {
+     display: block;
+     margin-top: 10px;
+     color: #007bff;
+     text-decoration: none;
+ }
+
+ .download-link:hover {
+     text-decoration: underline;
+ }

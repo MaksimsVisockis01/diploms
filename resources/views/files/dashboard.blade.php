@@ -1,51 +1,24 @@
-@extends('layouts.base')
+<div class="file-list-container">
+    <h2>Files</h2>
 
-@section('page.title')
-    Add File
-@endsection
-
-@section('content')
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+    @if(isset($files) && auth()->check())
+        @if ($files->count() > 0)
+            <ul class="file-list">
+                @foreach ($files as $file)
+                    <li class="file-item">
+                        <strong class="title">Title:</strong> {{ $file->title }}<br>
+                        <strong class="author">Author:</strong> {{ $file->author }}
+                        <p class="description">{{ $file->description }}</p>
+                        <a href="{{ Storage::url('files/' . $file->file_path) }}" class="download-link" target="_blank">
+                            Download File: {{ $file->file_path }}.{{ pathinfo($file->file_path, PATHINFO_EXTENSION) }}
+                        </a>
+                    </li>
                 @endforeach
             </ul>
-        </div>
-    @endif
-    @if(auth()->check())
-        <div class="file-upload-container">
-            <h2>Add File</h2>
-
-            <form action="{{ route('dashboard') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-
-                <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" name="title" id="title" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="author">Author:</label>
-                    <input type="text" name="author" id="author" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea name="description" id="description" rows="4" required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="file">File:</label>
-                    <input type="file" name="file" id="file" accept=".pdf, .doc, .docx" required>
-                </div>
-
-                <button type="submit">Upload File</button>
-            </form>
-        </div>
+        @else
+            <p>No files available.</p>
+        @endif
     @else
-        <p>You need to be logged in to upload a file.</p>
+        <p>You need to be logged in to view files.</p>
     @endif
-@endsection
+</div>
