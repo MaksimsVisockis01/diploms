@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Termwind\Question;
 
+Route::redirect('forum', '/forum/dashboard')->name('forum');
 
 Route::prefix('forum')->group(function () {
+
      
      Route::middleware('auth')->group(function () { //позволяет зайти, если пользователь уже зареган
           Route::get('question', [QuestionController::class, 'index'])->name('question');
