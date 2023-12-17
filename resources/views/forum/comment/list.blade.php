@@ -20,6 +20,16 @@
                             @endif
                         </span>
                     </div>
+                    @if (auth()->check() && auth()->user()->id === $comment->user_id)
+                        <span class="comment-actions">
+                            <a href="{{ route('comment.edit', ['question_id' => $comment->question_id, 'comment_id' => $comment->id]) }}" class="edit-comment-link">Edit</a>
+                            <form action="{{ route('comment.destroy', ['question_id' => $comment->question_id, 'comment_id' => $comment->id]) }}" method="POST" class="delete-comment-form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="delete-comment-button">Delete</button>
+                            </form>
+                        </span>
+                    @endif
                 </li>
             @endforeach
         </ul>

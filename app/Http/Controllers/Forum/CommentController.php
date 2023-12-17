@@ -59,24 +59,39 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($questionId, $commentId)
     {
-        //
+        $comment = Question_Comment::findOrFail($commentId);
+
+        return view('forum.comment.edit', compact('comment'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $questionId, $commentId)
     {
-        //
+        $comment = Question_Comment::findOrFail($commentId);
+
+        $validated = $request->validate([
+            'text' => ['required', 'string', 'max:100'],
+        ]);
+
+        $comment->update([
+            'text' => $validated['text'],
+        ]);
+
+        return redirect()->route('question.show', ['question_id' => $questionId])->with('status', 'Comment updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($questionId, $commentId)
     {
-        //
+        $comment = Question_Comment::findOrFail($commentId);
+        $comment->delete();
+
+        return redirect()->route('question.show', ['question_id' => $questionId])->with('status', 'Comment deleted successfully!');
     }
 }

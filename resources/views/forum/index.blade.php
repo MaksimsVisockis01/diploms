@@ -32,6 +32,16 @@
                         </span>
                         <br>
                         <a href="{{ route('question.show', $question->id) }}" class="view-question-link">View Full Question</a>
+                    
+                        @if(auth()->check() && $question->user_id == auth()->user()->id)
+                            <a href="{{ route('question.edit', $question->id) }}" class="edit-question-link">Edit Question</a>
+                            <form action="{{ route('question.destroy', $question->id) }}" method="POST" style="display: inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="delete-question-btn">Delete Question</button>
+                            </form>
+                        @endif
+                        
                     </div>
                 </li>
             @endforeach
