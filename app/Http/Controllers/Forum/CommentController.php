@@ -41,7 +41,7 @@ class CommentController extends Controller
                 'published_at' => now(),
             ]);
 
-            return redirect()->route('question.show', ['id' => $questionId])->with('status', 'Comment added successfully!');
+            return redirect()->route('question.show', ['question_id' => $questionId])->with('status', 'Comment added successfully!');
         }   else{
             return redirect()->route('question')->with('status', 'Failed');
         }

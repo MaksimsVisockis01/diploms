@@ -81,7 +81,7 @@ class QuestionController extends Controller
             'content' => $validated['content'],
         ]);
 
-        return redirect()->route('question.show', ['id' => $question->id])->with('status', 'Question updated successfully!');
+        return redirect()->route('forum')->with('status', 'Question updated successfully!');
     }
 
     /**
