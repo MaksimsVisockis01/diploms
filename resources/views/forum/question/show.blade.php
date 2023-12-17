@@ -26,7 +26,7 @@
 
         <a href="{{ route('forum') }}" class="back-to-forum-link">Back to Forum</a>
 
-        @if(session('user_id'))
+        @if(session('user_id') || session('admin_id'))
             @include('forum.comment.form')
         @endif
 

@@ -35,7 +35,10 @@
                     
                         @if(auth()->check() && $question->user_id == auth()->user()->id)
                             <a href="{{ route('question.edit', $question->id) }}" class="edit-question-link">Edit Question</a>
-                            <form action="{{ route('question.destroy', $question->id) }}" method="POST" style="display: inline-block;">
+                        @endif
+
+                        @if(auth()->check() && (auth()->user()->isAdmin()) || $question->user_id == auth()->user()->id)
+                            <form action="{{ route('question.destroy', $question->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this question?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="delete-question-btn">Delete Question</button>

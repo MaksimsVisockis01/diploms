@@ -31,5 +31,8 @@ class User extends Authenticatable
         '_token',
     ];
 
-    
+    public function isAdmin()
+    {
+        return $this->admin;
+    }
 }

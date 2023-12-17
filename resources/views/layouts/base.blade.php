@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('css/comment_form.css') }}">
     <link rel="stylesheet" href="{{ asset('css/files.css') }}">
     <link rel="stylesheet" href="{{ asset('css/files_list.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/users_table.css') }}">
 </head>
 <body>
 
@@ -26,7 +27,7 @@
         @if(session('user_id'))
             <li class="item button secondary"><a class="nav" href="{{ route('logout') }}">Logout</a></li>
         @elseif(session('admin_id'))
-            {{-- <li class="item"><a class="nav" href="{{ route('users') }}">User Ctrl</a></li> --}}
+            <li class="item"><a class="nav" href="{{ route('admin.users.index') }}">User Ctrl</a></li>
             {{-- <li class="item"><a class="nav" href="{{ route('gameAdd') }}">Add Game</a></li>
             <li class="item"><a class="nav" href="{{ route('gameList') }}">Game List</a></li> --}}
             <li class="item button secondary"><a class="nav" href="{{ route('logout') }}">Logout</a></li>
