@@ -1,0 +1,89 @@
+.question-details-container {
+     max-width: 800px;
+     margin: 20px auto;
+     padding: 20px;
+     background-color: #f8f8f8;
+     border: 1px solid #ddd;
+     border-radius: 8px;
+ }
+ 
+ .question-details-container h2 {
+     font-size: 1.8em;
+     margin-bottom: 15px;
+ }
+ 
+ /* Question Details */
+ .question-details {
+     margin-bottom: 20px;
+ }
+ 
+ .user-id,
+ .title,
+ .content,
+ .published-date-label,
+ .published-date {
+     display: block;
+     margin-bottom: 10px;
+ }
+ 
+ .user-id {
+     font-weight: bold;
+ }
+ 
+ /* Back to Forum Link */
+ .back-to-forum-link {
+     display: block;
+     margin-top: 15px;
+     font-size: 1.2em;
+     color: #3490dc;
+     text-decoration: none;
+ }
+ 
+ .back-to-forum-link:hover {
+     text-decoration: underline;
+ }
+ 
+ /* Comment List Container */
+ .comment-list-container {
+     margin-top: 30px;
+ }
+ 
+ .comment-list-container h3 {
+     font-size: 1.5em;
+     margin-bottom: 15px;
+ }
+ 
+ /* Comment List */
+ .comment-list {
+     list-style: none;
+     padding: 0;
+ }
+ 
+ .comment-item {
+     margin-bottom: 20px;
+     border: 1px solid #ddd;
+     border-radius: 8px;
+     padding: 15px;
+ }
+ 
+ .comment-header,
+ .comment-content,
+ .comment-footer {
+     margin-bottom: 10px;
+ }
+ 
+ .comment-header {
+     font-weight: bold;
+ }
+ 
+ .text {
+     margin-bottom: 15px;
+ }
+ 
+ .published-date-label {
+     font-weight: bold;
+ }
+ 
+ .published-date {
+     display: block;
+ }

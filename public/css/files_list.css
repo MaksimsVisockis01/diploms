@@ -1,0 +1,36 @@
+.file-list-container {
+     margin-top: 20px;
+     padding: 20px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     background-color: #f9f9f9;
+ }
+
+ .file-list {
+     list-style-type: none;
+     padding: 0;
+ }
+
+ .file-item {
+     margin-bottom: 20px;
+     padding: 15px;
+     border: 1px solid #ddd;
+     border-radius: 5px;
+     background-color: #fff;
+ }
+
+ .title, .author {
+     font-weight: bold;
+     color: #333;
+ }
+
+ .description {
+     color: #555;
+ }
+
+ .download-link {
+     display: block;
+     margin-top: 10px;
+     color: #007bff;
+     text-decoration: none;
+ }
