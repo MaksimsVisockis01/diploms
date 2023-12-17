@@ -16,7 +16,7 @@
 <nav>
     <ul class="menu">
         <li class="logo"><a class="nav" href="/">Logo</a></li>
-        <li class="item"><a class="nav" href="#">About</a></li>
+        <li class="item"><a class="nav" href="{{ route('files') }}">Files</a></li>
         <li class="item"><a class="nav" href="{{ route('forum') }}">Forum</a></li>
         <li class="item"><a class="nav" href="#">Services</a></li>
 
