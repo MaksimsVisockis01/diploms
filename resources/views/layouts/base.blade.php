@@ -20,7 +20,7 @@
 
 <nav>
     <ul class="menu">
-        <li class="logo"><a class="nav" href="/">Logo</a></li>
+        <li class="logo"><a class="nav" href="/">Izglitības iestāde</a></li>
         <li class="item"><a class="nav" href="{{ route('files') }}">Files</a></li>
         <li class="item"><a class="nav" href="{{ route('forum') }}">Forum</a></li>
 

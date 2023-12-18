@@ -1,31 +1,40 @@
-.comment-list-container {
-     margin-top: 20px;
- }
- 
- .comment-list {
-     list-style-type: none;
-     padding: 0;
- }
- 
- .comment-item {
-     border: 1px solid #ccc;
-     margin-bottom: 15px;
-     padding: 10px;
- }
- 
- .comment-header {
-     font-weight: bold;
- }
- 
- .comment-content {
-     margin-top: 10px;
- }
- 
- .published-date-label {
-     font-weight: bold;
-     margin-right: 5px;
- }
- 
- .published-date {
-     color: #555;
- }
+
+.comment-edit-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.comment-edit-heading {
+    color: #333;
+}
+
+.comment-edit-form {
+    margin-top: 20px;
+}
+
+.comment-edit-group {
+    margin-bottom: 15px;
+}
+
+.comment-edit-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.comment-edit-textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.comment-edit-submit {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
