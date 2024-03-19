@@ -6,27 +6,30 @@
 
 @section('content')
 
-<section class="custom-login-section">
-    <h1>Login</h1>
-    <form action="{{ route('login.store') }}" method="POST">
-        {{ csrf_field() }}
-        <div class="custom-form-field">
-            <input type="text" name="uid" required>
-            <span></span>
-            <label>Username</label>
-        </div>
-        @if ($errors->has('uid'))
-            <div class="custom-error">{{ $errors->first('uid') }}</div>
-        @endif
-        <div class="custom-form-field">
-            <input type="password" name="password" required>
-            <span></span>
-            <label>Password</label>
-        </div>
-        @if ($errors->has('password'))
-            <div class="custom-error">{{ $errors->first('password') }}</div>
-        @endif
-        <button type="submit">Login</button>
-    </form>
+<section class="my-5 border p-4 mx-auto w-50">
+    <div>
+        <h1>Login</h1>
+        <form action="{{ route('login.store') }}" method="POST">
+            {{ csrf_field() }}
+            <div class="mb-3">
+                <label for="uid" class="form-label">Username</label>
+                <input type="text" class="form-control" id="uid" name="uid" required>
+                @if ($errors->has('uid'))
+                    <div class="invalid-feedback">{{ $errors->first('uid') }}</div>
+                @endif
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+                @if ($errors->has('password'))
+                    <div class="invalid-feedback">{{ $errors->first('password') }}</div>
+                @endif
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
 </section>
+
+
+
 @endsection

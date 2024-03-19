@@ -5,66 +5,60 @@
 @endsection
 
 @section('content')
-<section class="signup-container">
-    <h1>Sign up</h1>
-    <form action="{{ route('register.store') }}" method="POST">
-        {{ csrf_field() }}
+<section class="my-5 border p-4 mx-auto w-50">
+    <div>
+        <h1>Sign up</h1>
+        <form action="{{ route('register.store') }}" method="POST">
+            {{ csrf_field() }}
 
-        <div class="form-field">
-            <input name="name" required>
-            <span></span>
-            <label>Name</label>
-        </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+                @if ($errors->has('name'))
+                    <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                @endif
+            </div>
 
-        @if ($errors->has('name'))
-            <div class="error">{{ $errors->first('name') }}</div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+                @if ($errors->has('email'))
+                    <div class="invalid-feedback">{{ $errors->first('email') }}</div>
+                @endif
+            </div>
+
+            <div class="mb-3">
+                <label for="uid" class="form-label">Username</label>
+                <input type="text" class="form-control" id="uid" name="uid" required>
+                @if ($errors->has('uid'))
+                    <div class="invalid-feedback">{{ $errors->first('uid') }}</div>
+                @endif
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+                @if ($errors->has('password'))
+                    <div class="invalid-feedback">{{ $errors->first('password') }}</div>
+                @endif
+            </div>
+
+            <div class="mb-3">
+                <label for="password_confirmation" class="form-label">Repeat Password</label>
+                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                @if ($errors->has('password_confirmation'))
+                    <div class="invalid-feedback">{{ $errors->first('password_confirmation') }}</div>
+                @endif
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+
+        @if (session('status'))
+            <div class="success">{{ session('status') }}</div>
         @endif
-
-        <div class="form-field">
-            <input type="email" name="email" required>
-            <span></span>
-            <label>Email</label>
-        </div>
-
-        @if ($errors->has('email'))
-            <div class="error">{{ $errors->first('email') }}</div>
-        @endif
-
-        <div class="form-field">
-            <input name="uid" required>
-            <span></span>
-            <label>Username</label>
-        </div>
-
-        @if ($errors->has('uid'))
-            <div class="error">{{ $errors->first('uid') }}</div>
-        @endif
-
-        <div class="form-field">
-            <input type="password" name="password" required>
-            <span></span>
-            <label>Password</label>
-        </div>
-
-        @if ($errors->has('password'))
-            <div class="error">{{ $errors->first('password') }}</div>
-        @endif
-
-        <div class="form-field">
-            <input type="password" name="password_confirmation" required>
-            <span></span>
-            <label>Repeat Password</label>
-        </div>
-
-        @if ($errors->has('password_confirmation'))
-            <div class="error">{{ $errors->first('password_confirmation') }}</div>
-        @endif
-
-        <button type="submit">Register</button>
-    </form>
-
-    @if (session('status'))
-        <div class="success">{{ session('status') }}</div>
-    @endif
+    </div>
 </section>
+
+
 @endsection

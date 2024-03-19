@@ -1,14 +1,14 @@
 @if ($question->comments->count() > 0)
-    <div class="comment-list-container">
+    <section class="comment-list-container my-3 border p-4 w-100">
         <h3>Comments</h3>
-        <ul class="comment-list">
+        <ul class="list-group ">
             @foreach ($question->comments as $comment)
-                <li class="comment-item">
+                <li class="list-group-item ">
                     <div class="comment-header">
                         <strong class="user-id">User:</strong> {{ $comment->user->uid }}
                     </div>
                     <div class="comment-content">
-                        <p class="text">{{ $comment->text }}</p>
+                        <p>{{ $comment->text }}</p>
                     </div>
                     <div class="comment-footer">
                         <strong class="published-date-label">Published at:</strong>
@@ -30,7 +30,7 @@
                                 <form action="{{ route('comment.destroy', ['question_id' => $comment->question_id, 'comment_id' => $comment->id]) }}" method="POST" class="delete-comment-form" onsubmit="return confirm('Are you sure you want to delete this comment?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="delete-comment-button">Delete</button>
+                                    <button type="submit" class="btn btn-danger delete-comment-button">Delete</button>
                                 </form>
                             </span>
                         @endif
@@ -38,5 +38,6 @@
                 </li>
             @endforeach
         </ul>
-    </div>
+    </section>
 @endif
+
