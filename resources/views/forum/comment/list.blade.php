@@ -20,6 +20,8 @@
                             @endif
                         </span>
                     </div>
+
+                    @if(auth()->check())
                     @if(auth()->check() && (auth()->user()->isAdmin()) || $question->user_id == auth()->user()->id)
                         @if(auth()->check() && $question->user_id == auth()->user()->id)
                             <span class="comment-actions">
@@ -34,6 +36,7 @@
                                 </form>
                             </span>
                         @endif
+                    @endif
                     @endif
                 </li>
             @endforeach

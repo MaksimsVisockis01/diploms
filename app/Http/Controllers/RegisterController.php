@@ -24,8 +24,6 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:7', 'max:30', 'confirmed'],
         ]);
 
-        
-
         $user = User::query()->create([
             'name' => $validated['name'],
             'email' => $validated['email'],
@@ -41,6 +39,6 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home');
+        return redirect()->route('/');
     }
 }

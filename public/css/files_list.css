@@ -1,36 +1,53 @@
 .file-list-container {
-     margin-top: 20px;
-     padding: 20px;
-     border: 1px solid #ccc;
-     border-radius: 5px;
-     background-color: #f9f9f9;
- }
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
- .file-list {
-     list-style-type: none;
-     padding: 0;
- }
+/* File List Header Styles */
+.file-list-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
 
- .file-item {
-     margin-bottom: 20px;
-     padding: 15px;
-     border: 1px solid #ddd;
-     border-radius: 5px;
-     background-color: #fff;
- }
+/* File List Styles */
+.file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
- .title, .author {
-     font-weight: bold;
-     color: #333;
- }
+.file-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
 
- .description {
-     color: #555;
- }
+.title, .author {
+    font-weight: bold;
+}
 
- .download-link {
-     display: block;
-     margin-top: 10px;
-     color: #007bff;
-     text-decoration: none;
- }
+/* Download Link Styles */
+.download-link {
+    display: block;
+    margin-top: 10px;
+    color: #428bca;
+    text-decoration: none;
+}
+
+.download-link:hover {
+    text-decoration: underline;
+}
+
+/* No Files Message Styles */
+.file-list-container p {
+    margin-top: 20px;
+    color: #555;
+}

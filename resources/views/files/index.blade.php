@@ -5,11 +5,9 @@
 @endsection
 
 @section('content')
-
-<section class="my-5 border p-4 mx-auto w-50">
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul class="list-unstyled">
+        <div class="alert alert-danger file-upload-error">
+            <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -19,38 +17,37 @@
 
     @if(auth()->check())
         <div class="file-upload-container">
-            <h2>Add File</h2>
+            <h2 class="file-upload-heading">Add File</h2>
 
-            <form action="{{ route('index.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('index.store') }}" method="POST" enctype="multipart/form-data" class="file-upload-form">
                 @csrf
 
-                <div class="mb-3">
-                    <label for="title" class="form-label">Title:</label>
-                    <input type="text" class="form-control" id="title" name="title" required>
+                <div class="form-group file-upload-group">
+                    <label for="title" class="file-upload-label">Title:</label>
+                    <input type="text" name="title" id="title" class="file-upload-input" required>
                 </div>
 
-                <div class="mb-3">
-                    <label for="author" class="form-label">Author:</label>
-                    <input type="text" class="form-control" id="author" name="author" required>
+                <div class="form-group file-upload-group">
+                    <label for="author" class="file-upload-label">Author:</label>
+                    <input type="text" name="author" id="author" class="file-upload-input" required>
                 </div>
 
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description:</label>
-                    <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                <div class="form-group file-upload-group">
+                    <label for="description" class="file-upload-label">Description:</label>
+                    <textarea name="description" id="description" rows="4" class="file-upload-textarea" required></textarea>
                 </div>
 
-                <div class="mb-3">
-                    <label for="file" class="form-label">File:</label>
-                    <input type="file" class="form-control" id="file" name="file" accept=".pdf, .doc, .docx" required>
+                <div class="form-group file-upload-group">
+                    <label for="file" class="file-upload-label">File:</label>
+                    <input type="file" name="file" id="file" accept=".pdf, .doc, .docx" class="file-upload-file" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Upload File</button>
+                <button type="submit" class="file-upload-submit">Upload File</button>
             </form>
         </div>
     @else
-        <p>You need to be logged in to upload a file.</p>
+        <p class="file-upload-login-message">You need to be logged in to upload a file.</p>
     @endif
 </section>
     @include('files.dashboard')
 @endsection
-

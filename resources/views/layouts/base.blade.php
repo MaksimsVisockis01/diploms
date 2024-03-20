@@ -73,6 +73,32 @@
     
     
 
+<<<<<<< HEAD
+=======
+<nav>
+    <ul class="menu">
+        <li class="logo"><a class="nav" href="/">Izglitības iestāde</a></li>
+        <li class="item"><a class="nav" href="{{ route('files') }}">Files</a></li>
+        <li class="item"><a class="nav" href="{{ route('forum') }}">Forum</a></li>
+
+        @if(session('user_id'))
+            <li class="item button secondary"><a class="nav" href="{{ route('logout') }}">Logout</a></li>
+        @elseif(session('admin_id'))
+            <li class="item"><a class="nav" href="{{ route('admin.users.index') }}">User Ctrl</a></li>
+            {{-- <li class="item"><a class="nav" href="{{ route('gameAdd') }}">Add Game</a></li>
+            <li class="item"><a class="nav" href="{{ route('gameList') }}">Game List</a></li> --}}
+            <li class="item button secondary"><a class="nav" href="{{ route('logout') }}">Logout</a></li>
+        @else
+            <li class="item button"><a class="nav" href="{{ route('login') }}">Log In</a></li>
+            <li class="item button secondary"><a class="nav" href="{{ route('register') }}">Sign Up</a></li>
+        @endif
+
+
+        <li class="toggle"><span class="bars"></span></li>
+    </ul>
+</nav>
+<script src="{{ asset('js/navbar.js') }}"></script>
+>>>>>>> 6aeabc4b03d37097401445fae783ed0ce918dae4
 
      @yield('content')
      

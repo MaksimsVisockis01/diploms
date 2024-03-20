@@ -20,7 +20,7 @@ class FilesController extends Controller
     public function dashboard()
     {
         $files = File::all(); 
-        return view('files.dashboard', compact('files'));
+        return view('files.index', compact('files'));
     }
     /**
      * Show the form for creating a new resource.
