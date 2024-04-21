@@ -32,4 +32,9 @@ class Question extends Model
         return $this->hasMany(Question_Comment::class, 'question_id');
     }
 
+    public function categories()
+    {
+    return $this->belongsToMany(Question::class, 'category_question');
+    }
+
 }

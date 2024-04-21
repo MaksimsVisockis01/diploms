@@ -31,13 +31,13 @@ class RegisterController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        if ($user->admin) {
-            Session::put('admin_id', $user->id);
-        }else{
-            Session::put('user_id', $user->id);
-        }
+        // if ($user->admin) {
+        //     Session::put('admin_id', $user->id);
+        // }else{
+        //     Session::put('user_id', $user->id);
+        // }
 
-        Auth::login($user);
+        // Auth::login($user);
 
         return redirect()->route('/');
     }
