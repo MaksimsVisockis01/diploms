@@ -70,8 +70,11 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = Question::findOrFail($id);
+        $categories = Category::all();
 
-        return view('forum.question.edit', compact('question'));
+        $selectedCategories = $question->categories->pluck('id')->toArray();
+
+        return view('forum.question.edit', compact('question', 'categories', 'selectedCategories'));
     }
 
     public function update(Request $request, $id)
@@ -81,12 +84,15 @@ class QuestionController extends Controller
         $validated = $request->validate([
             'title' => ['required','string','max:50'],
             'content' => ['required','string'],
+            'category_id' => ['nullable', 'array'],
         ]);
 
         $question->update([
             'title' => $validated['title'],
             'content' => $validated['content'],
         ]);
+
+        $question->categories()->sync($validated['category_id'] ?? []);
 
         return redirect()->route('forum')->with('status', 'Question updated successfully!');
     }

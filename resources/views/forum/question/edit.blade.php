@@ -22,6 +22,17 @@
                 <textarea name="content" id="content" rows="4" required>{{ $question->content }}</textarea>
             </div>
 
+            <div class="form-group">
+                <label for="categories">Categories:</label>
+                <select name="category_id[]" id="categories" multiple>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" {{ $question->categories->contains($category->id) ? 'selected' : '' }}>
+                            {{ $category->title }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
             <button type="submit">Update Question</button>
         </form>
 
