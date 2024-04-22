@@ -14,5 +14,11 @@ Route::prefix('admin')->group(function () {
         Route::delete('users/{user_id}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
 
         Route::get('categories', [CategoryController::class, 'index'])->name('admin.categories.index');
+        Route::delete('categories/{category_id}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+        
+        Route::get('category', [CategoryController::class, 'create'])->name('admin.category.create');
+        Route::post('category', [CategoryController::class, 'store'])->name('admin.category.store');
+        Route::get('category/{category_id}/edit', [CategoryController::class, 'edit'])->name('admin.category.edit');
+        Route::put('category/{category_id}', [CategoryController::class, 'update'])->name('admin.category.update');
     });
  });
