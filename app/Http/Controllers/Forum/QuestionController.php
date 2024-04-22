@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Forum;
 
 use App\Models\Question;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,9 @@ class QuestionController extends Controller
 {
     public function index()
     {
-        return view('forum.question');
+        $categories = Category::all();
+
+        return view('forum.question', compact('categories'));
     }
 
     public function create()
@@ -25,6 +28,7 @@ class QuestionController extends Controller
             $validated = $request->validate([
                 'title' =>['required', 'string','max:50'],
                 'content' => ['required', 'string'],
+                'category_id' => ['nullable', 'array'],
             ]);
     
             $user = auth()->user();
@@ -38,6 +42,9 @@ class QuestionController extends Controller
                     'content' => $validated['content'],
                     'published_at' => now(),
                 ]);
+                if(isset($validated['category_id'])) {
+                    $question->categories()->attach($validated['category_id']);
+                }
             
                 return redirect()->route('forum')->with('status', 'Question created successfully!');
             }

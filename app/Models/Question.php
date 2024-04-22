@@ -34,7 +34,7 @@ class Question extends Model
 
     public function categories()
     {
-    return $this->belongsToMany(Question::class, 'category_question');
+        return $this->belongsToMany(Category::class, 'category_question');
     }
 
 }

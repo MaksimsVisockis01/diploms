@@ -9,7 +9,7 @@
          make question
     </p>
 
-{{-- form --}}
+{{-- create question form --}}
 <section class="my-5 border p-4 mx-auto w-50">
     <div class="question-form">
         <h1>Create question</h1>
@@ -31,6 +31,17 @@
                     <div class="invalid-feedback">{{ $errors->first('content') }}</div>
                 @endif
             </div>
+
+            <select name="category_id[]" id="category_id" multiple>
+                @if ($categories->isEmpty())
+                    <option value="" disabled>No categories found</option>
+                @else
+                    <option value="">-- Select Categories --</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->title }}</option>
+                        @endforeach
+                @endif
+            </select>
     
             <button type="submit" class="btn btn-primary">Create Question</button>
         </form>
