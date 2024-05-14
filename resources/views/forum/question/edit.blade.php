@@ -5,37 +5,40 @@
 @endsection
 
 @section('content')
-    <div class="edit-question-container">
-        <h2>Edit Question</h2>
-
-        <form action="{{ route('question.update', $question->id) }}" method="POST">
-            @csrf
-            @method('PUT')
-
-            <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" name="title" id="title" value="{{ $question->title }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="content">Content:</label>
-                <textarea name="content" id="content" rows="4" required>{{ $question->content }}</textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="categories">Categories:</label>
-                <select name="category_id[]" id="categories" multiple>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" {{ $question->categories->contains($category->id) ? 'selected' : '' }}>
-                            {{ $category->title }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <button type="submit">Update Question</button>
-        </form>
-
-        <a href="{{ route('forum') }}" class="back-to-forum-link">Back to Forum</a>
-    </div>
+    <x-form-container>
+        <x-forms-header>
+            Edit Question
+        </x-forms-header>
+            <x-form-wrapper>
+                <form action="{{ route('question.update', $question->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+        
+                    <x-form-wrapper>
+                        <label for="title" class="form-label">Title:</label>
+                        <input type="text" name="title" id="title" value="{{ $question->title }}" class="form-control" required>
+                    </x-form-wrapper>
+        
+                    <x-form-wrapper>
+                        <label for="content" class="form-label">Content:</label>
+                        <textarea name="content" id="content" rows="4" class="form-control" required>{{ $question->content }}</textarea>
+                    </x-form-wrapper>
+        
+                    <x-form-wrapper>
+                        <select name="category_id[]" id="categories" class="form-select" aria-label="multiple select example" multiple>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" {{ $question->categories->contains($category->id) ? 'selected' : '' }}>
+                                    {{ $category->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </x-form-wrapper>
+        
+                    <button type="submit" class="btn btn-primary">Update Question</button>
+                </form>
+            </x-form-wrapper>
+        
+            <a href="{{ route('forum') }}" class="back-to-forum-link">Back to Forum</a>
+        
+    </x-form-container>
 @endsection

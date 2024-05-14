@@ -5,19 +5,20 @@
 @endsection
 
 @section('content')
-    <div class="comment-edit-container">
-        <h2 class="comment-edit-heading">Edit Comment</h2>
+    <x-form-container>
+        <x-forms-header>
+            edit Comment
+        </x-forms-header>
+            <form action="{{ route('comment.update', ['question_id' => $comment->question_id, 'comment_id' => $comment->id]) }}" method="POST" class="comment-edit-form">
+                @csrf
+                @method('PUT')
 
-        <form action="{{ route('comment.update', ['question_id' => $comment->question_id, 'comment_id' => $comment->id]) }}" method="POST" class="comment-edit-form">
-            @csrf
-            @method('PUT')
+                <x-form-wrapper>
+                    <label for="text" class="form-label">Comment Text</label>
+                    <textarea name="text" id="text" rows="4" class="form-control" required>{{ $comment->text }}</textarea>
+                </x-form-wrapper>
 
-            <div class="form-group comment-edit-group">
-                <label for="text" class="comment-edit-label">Comment Text:</label>
-                <textarea name="text" id="text" rows="4" class="comment-edit-textarea" required>{{ $comment->text }}</textarea>
-            </div>
-
-            <button type="submit" class="comment-edit-submit">Update Comment</button>
-        </form>
-    </div>
+                <button type="submit" class="btn btn-primary">Update Comment</button>
+            </form>
+    </x-form-container>
 @endsection

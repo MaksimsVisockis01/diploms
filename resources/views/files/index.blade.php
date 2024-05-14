@@ -16,38 +16,39 @@
     @endif
 
     @if(auth()->check())
-        <div class="file-upload-container">
-            <h2 class="file-upload-heading">Add File</h2>
+    <x-form-container>
+        <x-forms-header>
+            Add File
+        </x-forms-header>
 
             <form action="{{ route('index.store') }}" method="POST" enctype="multipart/form-data" class="file-upload-form">
                 @csrf
 
-                <div class="form-group file-upload-group">
-                    <label for="title" class="file-upload-label">Title:</label>
-                    <input type="text" name="title" id="title" class="file-upload-input" required>
-                </div>
+                <x-form-wrapper>
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="title" id="title"  class="form-control" required>
+                </x-form-wrapper>
 
-                <div class="form-group file-upload-group">
-                    <label for="author" class="file-upload-label">Author:</label>
-                    <input type="text" name="author" id="author" class="file-upload-input" required>
-                </div>
+                <x-form-wrapper>
+                    <label for="author" class="form-label">Author</label>
+                    <input type="text" name="author" id="author" class="form-control" required>
+                </x-form-wrapper>
 
-                <div class="form-group file-upload-group">
-                    <label for="description" class="file-upload-label">Description:</label>
-                    <textarea name="description" id="description" rows="4" class="file-upload-textarea" required></textarea>
-                </div>
+                <x-form-wrapper>
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="description" id="description" rows="4" class="form-control" required></textarea>
+                </x-form-wrapper>
 
-                <div class="form-group file-upload-group">
-                    <label for="file" class="file-upload-label">File:</label>
-                    <input type="file" name="file" id="file" accept=".pdf, .doc, .docx" class="file-upload-file" required>
-                </div>
+                <x-form-wrapper>
+                    <label for="file" class="form-label">File</label>
+                    <input type="file" name="file" id="file" accept=".pdf, .doc, .docx" class="form-control" required>
+                </x-form-wrapper>
 
-                <button type="submit" class="file-upload-submit">Upload File</button>
+                <button type="submit" class="btn btn-primary">Upload File</button>
             </form>
-        </div>
-    @else
-        <p class="file-upload-login-message">You need to be logged in to upload a file.</p>
-    @endif
-</section>
+        @else
+            <p class="file-upload-login-message">You need to be logged in to upload a file.</p>
+        @endif
+    </x-form-container>
     @include('files.dashboard')
 @endsection

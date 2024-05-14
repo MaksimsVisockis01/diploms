@@ -10,48 +10,48 @@
     </p>
 
 {{-- create question form --}}
-<section class="my-5 border p-4 mx-auto w-50">
-    <div class="question-form">
-        <h1>Create question</h1>
+<x-form-container>
+    <x-forms-header>
+        Create question
+    </x-forms-header>
         <form action="{{ route('question.store') }}" method="POST">
             @csrf
     
-            <div class="mb-3">
+            <x-form-wrapper>
                 <label for="title" class="form-label">Title</label>
                 <input type="text" class="form-control" id="title" name="title" required>
                 @if ($errors->has('title'))
                     <div class="invalid-feedback">{{ $errors->first('title') }}</div>
                 @endif
-            </div>
+            </x-form-wrapper>
     
-            <div class="mb-3">
+            <x-form-wrapper>
                 <label for="content" class="form-label">Content</label>
                 <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
                 @if ($errors->has('content'))
                     <div class="invalid-feedback">{{ $errors->first('content') }}</div>
                 @endif
-            </div>
+            </x-form-wrapper>
 
-            <select name="category_id[]" id="category_id" multiple>
-                @if ($categories->isEmpty())
-                    <option value="" disabled>No categories found</option>
-                @else
-                    <option value="">-- Select Categories --</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->title }}</option>
-                        @endforeach
-                @endif
-            </select>
-    
+            <x-form-wrapper>
+                <select name="category_id[]" id="category_id" class="form-select" aria-label="multiple select example" multiple>
+                    @if ($categories->isEmpty())
+                        <option value="">No categories found</option>
+                    @else
+                        <option value="">-- Select Categories --</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                            @endforeach
+                    @endif
+                </select>
+            </x-form-wrapper>
             <button type="submit" class="btn btn-primary">Create Question</button>
         </form>
     
         @if (session('status'))
             <div class="success">{{ session('status') }}</div>
         @endif
-    </div>
-</section>
-
+</x-form-container>
 {{-- endform --}}
 
 @endsection

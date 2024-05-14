@@ -15,7 +15,7 @@ class SearchController extends Controller
 
         foreach ($files as $file) {
             $path = $file->getRelativePathname();
-            $pageName = pathinfo($path, PATHINFO_FILENAME); // Получаем только имя файла без расширения
+            $pageName = pathinfo($path, PATHINFO_FILENAME); 
             $pages[] = ['path' => $path, 'title' => $pageName];
         }
 
@@ -30,7 +30,7 @@ class SearchController extends Controller
     
     //     foreach ($files as $file) {
     //         $path = $file->getRelativePathname();
-    //         $pageName = pathinfo($path, PATHINFO_FILENAME); // Получаем только имя файла без расширения
+    //         $pageName = pathinfo($path, PATHINFO_FILENAME);
     //         $pages[] = ['path' => $path, 'title' => $pageName, 'folder' => dirname($path)];
     //     }
     

@@ -24,8 +24,8 @@
                     @if(auth()->check())
                     @if(auth()->check() && (auth()->user()->isAdmin()) || $question->user_id == auth()->user()->id)
                         @if(auth()->check() && $question->user_id == auth()->user()->id)
-                            <span class="comment-actions">
-                                <a href="{{ route('comment.edit', ['question_id' => $comment->question_id, 'comment_id' => $comment->id]) }}" class="edit-comment-link">Edit</a>
+                            <span class="d-flex gap-1">
+                                <a href="{{ route('comment.edit', ['question_id' => $comment->question_id, 'comment_id' => $comment->id]) }}" class="btn btn-warning">Edit</a>
                         @endif     
                             
                         @if(auth()->check() && (auth()->user()->isAdmin()) || $question->user_id == auth()->user()->id)
