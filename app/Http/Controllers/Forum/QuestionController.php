@@ -2,19 +2,50 @@
 
 namespace App\Http\Controllers\Forum;
 
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Question;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
-class QuestionController extends Controller
+class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $categories = Category::all();
+        $search = $request->input('search');
 
-        return view('forum.question', compact('categories'));
+        // Включаем логирование запросов
+        DB::enableQueryLog();
+
+        $query = Question::query();
+
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                      ->orWhere('content', 'like', '%' . $search . '%')
+                      ->orWhereHas('categories', function ($query) use ($search) {
+                          $query->where('title', 'like', '%' . $search . '%');
+                      });
+            });
+        }
+
+        // Получаем результаты с категориями и пользователем
+        $questions = $query->with('categories', 'user')->get();
+
+        // Логирование SQL-запросов
+        $queries = DB::getQueryLog();
+        Log::info('SQL Queries: ', ['queries' => $queries]);
+
+        // Логирование результатов поиска
+        Log::info('Search Query: ', ['search' => $search, 'questions' => $questions->toArray()]);
+
+        return view('forum.index', compact('questions', 'categories', 'search'));
     }
+
+
 
     public function create()
     {

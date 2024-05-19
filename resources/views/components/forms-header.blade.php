@@ -1,5 +1,3 @@
-<div>
-    <h1>
-        {{ $slot }}
-    </h1>
+<div class="d-flex flex-row mb-4 justify-content-between">
+    {{ $slot }}
 </div>
