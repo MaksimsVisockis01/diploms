@@ -52,7 +52,7 @@
     @endif
     <x-cards>
         @foreach($questions as $question)
-            <x-card href="{{ route('question.show', $question->id) }}">
+            <x-card>
                 <x-settings-button>
                     @if(auth()->check() && $question->user_id == auth()->user()->id)
                     <li><a href="{{ route('question.edit', $question->id) }}" class="dropdown-item">Edit</a></li>
@@ -70,7 +70,7 @@
                 </x-settings-button>
                 <div class="question-header">
                     <span class="text-uppercase fs-5">{{ $question->user->uid }}</span><br>
-                    <span class="text-capitalize font-weight-bold">{{ $question->title }}</span>
+                    <a href=href="{{ route('question.show', $question->id) }}"><span class="text-capitalize font-weight-bold">{{ $question->title }}</span></a> 
                 </div>
                 <div class="question-content">
                     <p class="content-text">

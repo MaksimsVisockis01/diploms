@@ -8,15 +8,15 @@ use Illuminate\View\Component;
 
 class card extends Component
 {
-    public $href;
+    
     /**
      * Create a new component instance.
      * 
-     * @param string $href
+     * 
      */
-    public function __construct($href)
+    public function __construct()
     {
-        $this->href = $href;
+        
     }
 
     /**
