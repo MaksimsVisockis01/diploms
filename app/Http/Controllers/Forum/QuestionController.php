@@ -103,6 +103,8 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         $question = Question::findOrFail($id);
+        
+        $question->categories()->detach();
 
         $question->delete();
 

@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\View\Components\card;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,10 +23,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (config('app.debug')) {
-            DB::listen(function ($query) {
-                Log::info('Query Time: ' . $query->time . 'ms [' . $query->sql . ']');
-            });
-        }
     }
 }

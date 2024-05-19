@@ -65,6 +65,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         if ($category) {
+            $category->questions()->detach();
             $category->delete();
             return redirect()->route('admin.categories.index')->with('status', 'Category deleted successfully.');
         } else {

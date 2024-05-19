@@ -6,17 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class card extends Component
+class settings-button extends Component
 {
-    public $href;
     /**
      * Create a new component instance.
-     * 
-     * @param string $href
      */
-    public function __construct($href)
+    public function __construct()
     {
-        $this->href = $href;
+        //
     }
 
     /**
@@ -24,6 +21,6 @@ class card extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.card');
+        return view('components.settings-button');
     }
 }
