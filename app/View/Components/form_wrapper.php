@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class search-container extends Component
+class Form_wrapper extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class search-container extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.search-container');
+        return view('components.form-wrapper');
     }
 }

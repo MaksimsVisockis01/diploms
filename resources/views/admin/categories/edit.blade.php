@@ -5,6 +5,12 @@
 @endsection
 
 @section('content')
+<x-form-container>
+    <x-forms-header>
+        <x-forms-heading>
+            Edit Category
+        </x-forms-heading>
+    </x-forms-header>
     <div class="edit-category-container">
         <h2>Edit Category</h2>
 
@@ -27,4 +33,5 @@
 
         <a href="{{ route('admin.categories.index') }}" class="back-to-categories-link">Back to Categories</a>
     </div>
+</x-form-container>
 @endsection

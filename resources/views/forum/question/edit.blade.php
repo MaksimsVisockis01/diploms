@@ -6,9 +6,9 @@
 
 @section('content')
     <x-form-container>
-        <x-forms-header>
+        <x-edit-forms-header>
             Edit Question
-        </x-forms-header>
+        <x-edit-forms-header>
             <x-form-wrapper>
                 <form action="{{ route('question.update', $question->id) }}" method="POST">
                     @csrf

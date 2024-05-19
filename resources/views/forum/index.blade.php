@@ -1,21 +1,38 @@
 @extends('layouts.base')
 
-@section('page.title')
-    Forum
-@endsection
+@section('page.title', 'Forum')
 
 @section('content')
-
 <x-form-75-container>
     <x-forms-header>
-        <x-forms-heading>
-            Forum
-        </x-forms-heading>
+        <x-forms-heading>Forum</x-forms-heading>
         <x-search-container action="{{ route('forum') }}" method="GET">
             <input class="form-control mr-2" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ request('search') }}">
             <button class="btn btn-outline-primary" type="submit">Search</button>
         </x-search-container>
     </x-forms-header>
+
+    <form action="{{ route('forum') }}" method="GET">
+        <div class="row mb-3">
+            <div class="col">
+                <select class="form-control" name="category">
+                    <option value="">All Categories</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                            {{ $category->title }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col">
+                <input type="date" class="form-control" name="date" value="{{ request('date') }}">
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-primary" type="submit">Filter</button>
+            </div>
+        </div>
+    </form>
+
     <x-form-wrapper>
         <a href="{{ route('question') }}" class="btn btn-primary">Create Question</a>
     </x-form-wrapper>
@@ -23,8 +40,6 @@
     <x-cards>
         @if(request('search'))
             <p>Search results for: "{{ request('search') }}"</p>
-        @else
-            <p>All Questions</p>
         @endif
 
         @foreach($questions as $question)
@@ -41,11 +56,7 @@
                 <div class="question-footer">
                     <strong class="published-date-label">Published at:</strong>
                     <span class="published-date">
-                        @if ($question->published_at)
-                            {{ \Carbon\Carbon::parse($question->published_at)->format('Y-m-d') }}
-                        @else
-                            null
-                        @endif
+                        {{ $question->published_at ? \Carbon\Carbon::parse($question->published_at)->format('Y-m-d') : 'null' }}
                     </span>
                     <br>
                     @if ($question->categories->isNotEmpty())

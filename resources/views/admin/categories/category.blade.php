@@ -10,27 +10,29 @@
     </p>
 
 {{-- form --}}
-<section class="my-5 border p-4 mx-auto w-50">
-    <div class="category-form">
-        <h1>Create category</h1>
+<x-form-container>
+    <x-forms-header>
+        <x-forms-heading>
+            Create category
+        </x-forms-heading>
+    </x-forms-header>
         <form action="{{ route('admin.category.store') }}" method="POST">
             @csrf
-    
-            <div class="mb-3">
+            <x-form-wrapper>
                 <label for="title" class="form-label">Title</label>
                 <input type="text" class="form-control" id="title" name="title" required>
                 @if ($errors->has('title'))
                     <div class="invalid-feedback">{{ $errors->first('title') }}</div>
                 @endif
-            </div>
+            </x-form-wrapper>
     
-            <div class="mb-3">
+            <x-form-wrapper>
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
                 @if ($errors->has('description'))
                     <div class="invalid-feedback">{{ $errors->first('description') }}</div>
                 @endif
-            </div>
+            </x-form-wrapper>
     
             <button type="submit" class="btn btn-primary">Create Category</button>
         </form>
@@ -38,8 +40,7 @@
         @if (session('status'))
             <div class="success">{{ session('status') }}</div>
         @endif
-    </div>
-</section>
+</x-form-container>
 
 {{-- endform --}}
 

@@ -5,14 +5,13 @@
 @endsection
 
 @section('content')
-    <p>
-         make question
-    </p>
 
 {{-- create question form --}}
 <x-form-container>
     <x-forms-header>
-        Create question
+        <x-forms-heading>
+            Create question
+        </x-forms-heading>
     </x-forms-header>
         <form action="{{ route('question.store') }}" method="POST">
             @csrf
@@ -23,7 +22,7 @@
                 @if ($errors->has('title'))
                     <div class="invalid-feedback">{{ $errors->first('title') }}</div>
                 @endif
-            </x-form-wrapper>
+            <x-form-wrapper />
     
             <x-form-wrapper>
                 <label for="content" class="form-label">Content</label>

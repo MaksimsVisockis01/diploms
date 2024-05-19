@@ -6,28 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Question;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
-    // public function index()
-    // {
-
-    //     $questions = Question::leftJoin('category_question', 'questions.id', '=', 'category_question.question_id')
-    //     ->leftJoin('categories', 'category_question.category_id', '=', 'categories.id')
-    //     ->select('questions.*', 'categories.title as category_title')
-    //     ->get();
-
-    //     return view('forum.index', compact('questions'));
-
-    // }
     public function index(Request $request)
     {
         $categories = Category::all();
         $search = $request->input('search');
-
-        // DB::enableQueryLog();
+        $categoryFilter = $request->input('category');
+        $dateFilter = $request->input('date');
 
         $query = Question::query();
 
@@ -41,13 +28,20 @@ class DashboardController extends Controller
             });
         }
 
-        $questions = $query->with('categories', 'user')->get();
+        if ($categoryFilter) {
+            $query->whereHas('categories', function ($query) use ($categoryFilter) {
+                $query->where('categories.id', $categoryFilter);
+            });
+        }
 
-        // $queries = DB::getQueryLog();
-        // Log::info('SQL Queries: ', ['queries' => $queries]);
+        if ($dateFilter) {
+            $query->whereDate('published_at', $dateFilter);
+        }
 
-        // Log::info('Search Query: ', ['search' => $search, 'questions' => $questions->toArray()]);
+        $questions = $query->with('categories', 'user')
+                           ->orderBy('published_at', 'desc')
+                           ->get();
 
-        return view('forum.index', compact('questions', 'categories', 'search'));
-    } 
+        return view('forum.index', compact('questions', 'categories', 'search', 'categoryFilter', 'dateFilter'));
+    }
 }

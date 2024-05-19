@@ -11,8 +11,6 @@ use Termwind\Question;
 Route::redirect('forum', '/forum/dashboard')->name('forum');
 
 Route::prefix('forum')->group(function () {
-
-     
      Route::middleware('auth')->group(function () { //позволяет зайти, если пользователь уже зареган
           Route::get('question', [QuestionController::class, 'index'])->name('question');
           Route::post('question', [QuestionController::class, 'store'])->name('question.store');
@@ -27,8 +25,7 @@ Route::prefix('forum')->group(function () {
      });
 
      Route::get('dashboard', [DashboardController::class, 'index'])->name('forum');
-
+     
      Route::get('question/{question_id}', [QuestionController::class, 'show'])->name('question.show');
-
      Route::post('question/{question_id}/comments', [CommentController::class, 'store'])->name('question.comment.store');
 });
