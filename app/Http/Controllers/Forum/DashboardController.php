@@ -27,8 +27,7 @@ class DashboardController extends Controller
         $categories = Category::all();
         $search = $request->input('search');
 
-        // Включаем логирование запросов
-        DB::enableQueryLog();
+        // DB::enableQueryLog();
 
         $query = Question::query();
 
@@ -42,15 +41,12 @@ class DashboardController extends Controller
             });
         }
 
-        // Получаем результаты с категориями и пользователем
         $questions = $query->with('categories', 'user')->get();
 
-        // Логирование SQL-запросов
-        $queries = DB::getQueryLog();
-        Log::info('SQL Queries: ', ['queries' => $queries]);
+        // $queries = DB::getQueryLog();
+        // Log::info('SQL Queries: ', ['queries' => $queries]);
 
-        // Логирование результатов поиска
-        Log::info('Search Query: ', ['search' => $search, 'questions' => $questions->toArray()]);
+        // Log::info('Search Query: ', ['search' => $search, 'questions' => $questions->toArray()]);
 
         return view('forum.index', compact('questions', 'categories', 'search'));
     } 
