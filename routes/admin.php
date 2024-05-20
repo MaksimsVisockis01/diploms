@@ -21,4 +21,4 @@ Route::prefix('admin')->group(function () {
         Route::get('category/{category_id}/edit', [CategoryController::class, 'edit'])->name('admin.category.edit');
         Route::put('category/{category_id}', [CategoryController::class, 'update'])->name('admin.category.update');
     });
- });
+});

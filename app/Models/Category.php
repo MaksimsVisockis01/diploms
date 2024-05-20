@@ -8,16 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $attributes = [
-        //
-    ];
 
     protected $fillable = [
         'title', 'description'
     ];
-    
+
     public function questions()
-    {  
-    return $this->belongsToMany(Question::class, 'category_question');
+    {
+        return $this->belongsToMany(Question::class, 'category_question');
+    }
+
+    public function files()
+    {
+        return $this->belongsToMany(File::class, 'category_file');
     }
 }

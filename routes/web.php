@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\PublicCategoryController;
 use App\Http\Controllers\Forum\DashboardController;
 use App\Http\Controllers\Forum\QuestionController;
 use App\Http\Controllers\LoginController;
@@ -15,7 +15,8 @@ use Termwind\Question;
 
 
 
-
+Route::get('/categories', [PublicCategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/{id}', [PublicCategoryController::class, 'show'])->name('category.show');
 // Route::get('/', function () {
 //     return view('welcome');
 // });

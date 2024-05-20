@@ -43,6 +43,10 @@ class DashboardController extends Controller
 
         $questions = $query->with('categories', 'user')->get();
 
+        foreach ($questions as $question) {
+            $question->comments_count = $question->comments()->count();
+        }
+
         return view('forum.index', compact('questions', 'categories', 'search', 'categoryFilter', 'dateFilter'));
     }
 }

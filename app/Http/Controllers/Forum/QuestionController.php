@@ -45,13 +45,11 @@ class QuestionController extends Controller
                 if(isset($validated['category_id'])) {
                     $question->categories()->attach($validated['category_id']);
                 }
-            
                 return redirect()->route('forum')->with('status', 'Question created successfully!');
             }
-        }   else{
+        }else{
             return redirect()->route('forum')->with('status', 'Failed');
         }
-        
     }
 
     /**
@@ -86,7 +84,7 @@ class QuestionController extends Controller
             'content' => ['required','string'],
             'category_id' => ['nullable', 'array'],
         ]);
-
+        
         $question->update([
             'title' => $validated['title'],
             'content' => $validated['content'],

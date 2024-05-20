@@ -14,12 +14,11 @@ class File extends Model
     ];
 
     protected $fillable = [
-        'user_id','title', 'author', 'description', 'file_path', 'published_at',
+        'user_id', 'title', 'author', 'description', 'file_path', 'published_at',
     ];
 
-    
     protected $hidden = [
-        'user_id','file_path',
+        'user_id', 'file_path',
     ];
 
     public function user()
@@ -27,4 +26,8 @@ class File extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_file');
+    }
 }
