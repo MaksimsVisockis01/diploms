@@ -3,78 +3,97 @@
 namespace App\Http\Controllers\Files;
 
 use App\Models\File;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class FilesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
+        $categories = Category::all();
         $files = File::all();
-        return view('files.index', compact('files'));
+        return view('files.addfile', compact('files', 'categories'));
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
-        $files = File::all(); 
-        return view('files.index', compact('files'));
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $categories = Category::all();
+        $search = $request->input('search');
+        $p_search = $request->input('p_search');
+        $categoryFilter = $request->input('category');
+        $dateFilter = $request->input('date');
+        $sortOrder = $request->input('sort', 'desc');
+
+        $query = File::query();
+
+        if ($search || $p_search) {
+            $query->where(function ($query) use ($search, $p_search) {
+                $query->where('title', 'like', '%' . ($search ?: $p_search) . '%')
+                      ->orWhere('author', 'like', '%' . ($search ?: $p_search) . '%')
+                      ->orWhere('description', 'like', '%' . ($search ?: $p_search) . '%')
+                      ->orWhere('file_path', 'like', '%' . ($search ?: $p_search) . '%')
+                      ->orWhereHas('categories', function ($query) use ($search, $p_search) {
+                          $query->where('title', 'like', '%' . ($search ?: $p_search) . '%');
+                      });
+            });
+        }
+
+        if ($categoryFilter) {
+            $query->whereHas('categories', function ($query) use ($categoryFilter) {
+                $query->where('categories.id', $categoryFilter);
+            });
+        }
+
+        if ($dateFilter) {
+            $query->whereDate('published_at', $dateFilter);
+        }
+
+        $query->orderBy('published_at', $sortOrder);
+
+        $files = $query->get();
+
+        return view('files.dashboard', compact('files', 'categories', 'search', 'p_search'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
+
     public function store(Request $request)
     {
-        if (auth()->check()) {
-            // Validate the request
-            $validated = $request->validate([
-                'title' => ['required', 'string'],
-                'author' => ['required', 'string'],
-                'description' => ['required', 'string'],
-                'file' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:10240'],
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'author' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'file' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:10240'],
+            'category_id' => ['nullable', 'array'],
+            'category_id.*' => 'exists:categories,id',
+        ]);
+
+        $file = $request->file('file');
+
+        if ($file->isValid()) {
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('files', $fileName, 'public');
+
+            $newFile = File::create([
+                'user_id' => auth()->id(),
+                'title' => $validated['title'],
+                'author' => $validated['author'],
+                'description' => $validated['description'],
+                'file_path' => $fileName,
+                'published_at' => now(),
             ]);
-        
-            // Process the file
-            if ($request->hasFile('file')) {
-                $file = $request->file('file');
-            
-                // Check if the file is valid
-                if ($file->isValid()) {
-                    // Generate a unique filename
-                    $fileName = time() . '_' . $file->getClientOriginalName();
-                
-                    // Store the file in the public disk
-                    $file->storeAs('files', $fileName, 'public');
-                
-                    // Create a new File record in the database
-                    File::create([
-                        'user_id' => auth()->id(),
-                        'title' => $validated['title'],
-                        'author' => $validated['author'],
-                        'description' => $validated['description'],
-                        'file_path' => $fileName, // Store the filename, not the full path
-                        'published_at' => now(),
-                    ]);
-                
-                    return redirect()->route('dashboard')->with('status', 'File uploaded successfully!');
-                } else {
-                    return redirect()->route('dashboard')->with('status', 'Invalid file.');
-                }
+
+            if (isset($validated['category_id'])) {
+                $newFile->categories()->attach($validated['category_id']);
             }
-        }
-    
-        return redirect()->route('dashboard')->with('status', 'Failed to upload file.');
+
+                return redirect()->route('dashboard')->with('status', 'File uploaded successfully!');
+            } else {
+                return redirect()->route('dashboard')->with('status', 'Failed to upload file.');
+            }
     }
+
 
 
     /**

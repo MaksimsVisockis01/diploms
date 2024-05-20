@@ -6,7 +6,7 @@
 <div class="container">
     <h1 class="my-4">Categories</h1>
     <div class="row">
-        @foreach($categories as $category)
+        @foreach($categories->sortByDesc('created_at') as $category)
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">

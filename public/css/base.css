@@ -3,3 +3,13 @@
      filter: brightness(0.96) !important;
      transition: background-color 0.5s ease;
 } */
+.page-button {
+     margin: 0 2px;
+ }
+ .dots {
+     margin: 0 5px;
+     display: none;
+ }
+ .pagination-buttons {
+     margin-top: 15px;
+ }

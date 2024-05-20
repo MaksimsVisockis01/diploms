@@ -5,16 +5,14 @@ use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Termwind\Question;
 
-Route::redirect('files', '/files/index')->name('files');
+Route::redirect('files', '/files/dashboard')->name('files');
 
 Route::prefix('files')->group(function () {
      Route::middleware('auth')->group(function () {
-          Route::post('index', [FilesController::class, 'store'])->name('index.store');
-
-
+          Route::post('post', [FilesController::class, 'store'])->name('addfile.store');
      });
 
-     Route::get('index', [FilesController::class, 'index'])->name('index');
+     Route::get('index', [FilesController::class, 'index'])->name('addfile');
      Route::get('dashboard', [FilesController::class, 'dashboard'])->name('dashboard');
 
 });

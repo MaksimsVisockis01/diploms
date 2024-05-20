@@ -110,9 +110,8 @@
 
     $(document).on('click', '#search-results a', function(e) {
     e.preventDefault();
-    var routeUrl = new URL($(this).attr('href'), window.location.origin).pathname; // Получаем только путь относительно корня
-    routeUrl = routeUrl.replace('.blade.php', ''); // Удаляем расширение .blade.php
-    window.location.href = routeUrl; // Переходим по URL маршруту относительно корня без расширения .blade.php
+    var routeUrl = new URL($(this).attr('href'), window.location.origin).pathname;
+    window.location.href = routeUrl;
     $('#search-input').val('');
     $('#search-results').removeClass('show');
     });
@@ -123,7 +122,52 @@
         }
     });
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const pageButtons = document.querySelectorAll('.page-button');
+    const cardGroups = document.querySelectorAll('.card-group');
+    const dots = document.querySelector('.dots');
+    const maxVisibleButtons = 5;
 
+    function updatePagination() {
+        const totalGroups = cardGroups.length;
+        let currentPage = 1;
+
+        pageButtons.forEach(button => {
+            if (button.classList.contains('active')) {
+                currentPage = parseInt(button.getAttribute('data-target'));
+            }
+        });
+
+        let startPage = Math.max(currentPage - 2, 1);
+        let endPage = Math.min(startPage + maxVisibleButtons - 1, totalGroups);
+
+        pageButtons.forEach((button, index) => {
+            const page = index + 1;
+            if (page >= startPage && page <= endPage) {
+                button.style.display = 'inline-block';
+            } else {
+                button.style.display = 'none';
+            }
+        });
+
+        dots.style.display = (totalGroups > maxVisibleButtons) ? 'inline-block' : 'none';
+    }
+
+    pageButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const targetGroup = parseInt(this.getAttribute('data-target'));
+
+            cardGroups.forEach(group => {
+                group.style.display = (parseInt(group.getAttribute('data-group')) === targetGroup) ? 'block' : 'none';
+            });
+
+            updatePagination();
+        });
+    });
+
+    pageButtons[0].classList.add('active');
+    updatePagination();
+});
 // $(document).ready(function(){
 //         $('.dropdown').on('click', function(event){
 //             $(this).find('.dropdown-menu').toggleClass('show');
