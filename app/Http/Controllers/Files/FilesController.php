@@ -6,13 +6,14 @@ use App\Models\File;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FilesController extends Controller
 {
     public function index()
     {
         $categories = Category::all();
-        $files = File::paginate(5); // Пагинация с 5 элементами на странице
+        $files = File::paginate(5);
         return view('files.addfile', compact('files', 'categories'));
     }
 
@@ -51,7 +52,7 @@ class FilesController extends Controller
 
         $query->orderBy('published_at', $sortOrder);
 
-        $files = $query->paginate(5); // Пагинация с 5 элементами на странице
+        $files = $query->paginate(5);
 
         return view('files.dashboard', compact('files', 'categories', 'search', 'p_search'));
     }
@@ -92,23 +93,66 @@ class FilesController extends Controller
         }
     }
 
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $file = File::findOrFail($id);
+        $categories = Category::all();
+        return view('files.edit', compact('file', 'categories'));
     }
 
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'author' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'file' => ['nullable', 'file', 'mimes:pdf,doc,docx', 'max:10240'],
+            'category_id' => ['nullable', 'array'],
+            'category_id.*' => 'exists:categories,id',
+        ]);
+
+        $file = File::findOrFail($id);
+
+        if ($request->hasFile('file')) {
+            // Delete the old file
+            Storage::delete('files/' . $file->file_path);
+
+            // Store the new file
+            $newFile = $request->file('file');
+            $fileName = time() . '_' . $newFile->getClientOriginalName();
+            $newFile->storeAs('files', $fileName, 'public');
+
+            $file->file_path = $fileName;
+        }
+
+        $file->update([
+            'title' => $validated['title'],
+            'author' => $validated['author'],
+            'description' => $validated['description'],
+        ]);
+
+        if (isset($validated['category_id'])) {
+            $file->categories()->sync($validated['category_id']);
+        }
+
+        return redirect()->route('dashboard')->with('status', 'File updated successfully!');
     }
 
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $file = File::findOrFail($id);
 
-    public function destroy(string $id)
-    {
-        //
+        $file->categories()->detach();
+
+        $filePath = 'files/' . $file->file_path;
+
+        if (Storage::disk('public')->exists($filePath)) {
+            Storage::disk('public')->delete($filePath);
+        }
+
+        // Delete the file record from the database
+        $file->delete();
+
+        return redirect()->route('dashboard')->with('success', 'File deleted successfully');
     }
 }

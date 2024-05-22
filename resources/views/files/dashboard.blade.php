@@ -101,15 +101,33 @@
         @endif
     </x-cards>
 
-    <!-- Custom Pagination -->
-    <div class="pagination-buttons d-flex justify-content-center gap-1">
-        {{ $files->appends(request()->query())->links() }}
+    @if ($files->lastPage() > 1)
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <nav>
+                <ul class="pagination mb-0">
+                    <li class="page-item {{ $files->onFirstPage() ? 'disabled' : '' }}">
+                        <a class="page-link" href="{{ $files->previousPageUrl() }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    @for ($i = 1; $i <= $files->lastPage(); $i++)
+                        <li class="page-item {{ $files->currentPage() == $i ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $files->url($i) }}">{{ $i }}</a>
+                        </li>
+                    @endfor
+                    <li class="page-item {{ $files->hasMorePages() ? '' : 'disabled' }}">
+                        <a class="page-link" href="{{ $files->nextPageUrl() }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
 
-        <!-- Page Search Form -->
-        <form action="{{ route('dashboard') }}" method="GET" class="ml-3 d-inline">
-            <input type="number" class="form-control d-inline-block" style="width: 160px;" name="page" min="1" max="{{ $files->lastPage() }}" placeholder="Page" aria-label="Page">
-            <button class="btn btn-outline-primary" type="submit">Go</button>
-        </form>
-    </div>
+            <form action="{{ route('dashboard') }}" method="GET" class="d-inline-flex ml-3">
+                <input type="number" class="form-control mr-2" style="width: 100px;" name="page" min="1" max="{{ $files->lastPage() }}" placeholder="Page" aria-label="Page">
+                <button class="btn btn-outline-primary" type="submit">Go</button>
+            </form>
+        </div>
+    @endif
 </x-form-75-container>
 @endsection

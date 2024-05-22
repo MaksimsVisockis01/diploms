@@ -10,9 +10,13 @@ Route::redirect('files', '/files/dashboard')->name('files');
 Route::prefix('files')->group(function () {
      Route::middleware('auth')->group(function () {
           Route::post('post', [FilesController::class, 'store'])->name('addfile.store');
+          Route::get('index', [FilesController::class, 'index'])->name('addfile');
+          Route::delete('destroy/{file}', [FilesController::class, 'destroy'])->name('files.destroy');
+          Route::get('edit/{file}', [FilesController::class, 'edit'])->name('files.edit');
+          Route::put('update/{file}', [FilesController::class, 'update'])->name('files.update');
      });
 
-     Route::get('index', [FilesController::class, 'index'])->name('addfile');
+     
      Route::get('dashboard', [FilesController::class, 'dashboard'])->name('dashboard');
 
 });
