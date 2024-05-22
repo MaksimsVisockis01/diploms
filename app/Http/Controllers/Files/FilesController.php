@@ -12,7 +12,7 @@ class FilesController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $files = File::all();
+        $files = File::paginate(5); // Пагинация с 5 элементами на странице
         return view('files.addfile', compact('files', 'categories'));
     }
 
@@ -51,12 +51,10 @@ class FilesController extends Controller
 
         $query->orderBy('published_at', $sortOrder);
 
-        $files = $query->get();
+        $files = $query->paginate(5); // Пагинация с 5 элементами на странице
 
         return view('files.dashboard', compact('files', 'categories', 'search', 'p_search'));
     }
-
-
 
     public function store(Request $request)
     {
@@ -88,41 +86,27 @@ class FilesController extends Controller
                 $newFile->categories()->attach($validated['category_id']);
             }
 
-                return redirect()->route('dashboard')->with('status', 'File uploaded successfully!');
-            } else {
-                return redirect()->route('dashboard')->with('status', 'Failed to upload file.');
-            }
+            return redirect()->route('dashboard')->with('status', 'File uploaded successfully!');
+        } else {
+            return redirect()->route('dashboard')->with('status', 'Failed to upload file.');
+        }
     }
 
-
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //

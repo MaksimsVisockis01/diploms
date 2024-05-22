@@ -122,27 +122,22 @@
         }
     });
 });
+//
 document.addEventListener('DOMContentLoaded', function () {
     const pageButtons = document.querySelectorAll('.page-button');
     const cardGroups = document.querySelectorAll('.card-group');
     const dots = document.querySelector('.dots');
     const maxVisibleButtons = 5;
+    let currentPage = 1;
 
     function updatePagination() {
         const totalGroups = cardGroups.length;
-        let currentPage = 1;
+        const totalPages = Math.ceil(totalGroups / maxVisibleButtons);
+        const startPage = Math.max(currentPage - 2, 1);
+        const endPage = Math.min(startPage + maxVisibleButtons - 1, totalPages);
 
         pageButtons.forEach(button => {
-            if (button.classList.contains('active')) {
-                currentPage = parseInt(button.getAttribute('data-target'));
-            }
-        });
-
-        let startPage = Math.max(currentPage - 2, 1);
-        let endPage = Math.min(startPage + maxVisibleButtons - 1, totalGroups);
-
-        pageButtons.forEach((button, index) => {
-            const page = index + 1;
+            const page = parseInt(button.getAttribute('data-target'));
             if (page >= startPage && page <= endPage) {
                 button.style.display = 'inline-block';
             } else {
@@ -156,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
     pageButtons.forEach(button => {
         button.addEventListener('click', function () {
             const targetGroup = parseInt(this.getAttribute('data-target'));
+            currentPage = targetGroup;
 
             cardGroups.forEach(group => {
                 group.style.display = (parseInt(group.getAttribute('data-group')) === targetGroup) ? 'block' : 'none';
