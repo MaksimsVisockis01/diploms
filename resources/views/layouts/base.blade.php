@@ -124,45 +124,55 @@
 });
 //
 document.addEventListener('DOMContentLoaded', function () {
-    const pageButtons = document.querySelectorAll('.page-button');
-    const cardGroups = document.querySelectorAll('.card-group');
-    const dots = document.querySelector('.dots');
-    const maxVisibleButtons = 5;
-    let currentPage = 1;
+    function initializePagination(containerId, buttonClass) {
+        const pageButtons = document.querySelectorAll(`#${containerId} .${buttonClass}`);
+        const cardGroups = document.querySelectorAll(`#${containerId} .card-group`);
+        const dots = document.querySelector(`#${containerId} .dots`);
+        const maxVisibleButtons = 5;
+        let currentPage = 1;
 
-    function updatePagination() {
-        const totalGroups = cardGroups.length;
-        const totalPages = Math.ceil(totalGroups / maxVisibleButtons);
-        const startPage = Math.max(currentPage - 2, 1);
-        const endPage = Math.min(startPage + maxVisibleButtons - 1, totalPages);
+        function updatePagination() {
+            const totalGroups = cardGroups.length;
+            const totalPages = Math.ceil(totalGroups / maxVisibleButtons);
+            const startPage = Math.max(currentPage - 2, 1);
+            const endPage = Math.min(startPage + maxVisibleButtons - 1, totalPages);
 
-        pageButtons.forEach(button => {
-            const page = parseInt(button.getAttribute('data-target'));
-            if (page >= startPage && page <= endPage) {
-                button.style.display = 'inline-block';
-            } else {
-                button.style.display = 'none';
-            }
-        });
-
-        dots.style.display = (totalGroups > maxVisibleButtons) ? 'inline-block' : 'none';
-    }
-
-    pageButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const targetGroup = parseInt(this.getAttribute('data-target'));
-            currentPage = targetGroup;
-
-            cardGroups.forEach(group => {
-                group.style.display = (parseInt(group.getAttribute('data-group')) === targetGroup) ? 'block' : 'none';
+            pageButtons.forEach(button => {
+                const page = parseInt(button.getAttribute('data-target'));
+                if (page >= startPage && page <= endPage) {
+                    button.style.display = 'inline-block';
+                } else {
+                    button.style.display = 'none';
+                }
             });
 
-            updatePagination();
-        });
-    });
+            if (dots) {
+                dots.style.display = (totalGroups > maxVisibleButtons) ? 'inline-block' : 'none';
+            }
+        }
 
-    pageButtons[0].classList.add('active');
-    updatePagination();
+        pageButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const targetGroup = parseInt(this.getAttribute('data-target'));
+                currentPage = targetGroup;
+
+                cardGroups.forEach(group => {
+                    group.style.display = (parseInt(group.getAttribute('data-group')) === targetGroup) ? 'block' : 'none';
+                });
+
+                updatePagination();
+            });
+        });
+
+        if (pageButtons.length > 0) {
+            pageButtons[0].classList.add('active');
+        }
+        updatePagination();
+    }
+
+    initializePagination('files-container', 'page-button');
+
+    initializePagination('forum-container', 'page-button');
 });
 // $(document).ready(function(){
 //         $('.dropdown').on('click', function(event){

@@ -48,9 +48,9 @@
     @if(request('search'))
         <p>Search results for: "{{ request('search') }}"</p>
     @endif
-    <x-cards>
+    <x-cards id="forum-container">
         @foreach($questions as $question)
-            <x-card>
+            <x-card class="card-group" data-group="{{ $loop->index + 1 }}">
                 <x-settings-button>
                     @if(auth()->check() && $question->user_id == auth()->user()->id)
                     <li><a href="{{ route('question.edit', $question->id) }}" class="dropdown-item">Edit</a></li>
@@ -95,5 +95,34 @@
             </x-card>
         @endforeach
     </x-cards>
+
+    @if ($questions->lastPage() > 1)
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <nav>
+                <ul class="pagination mb-0">
+                    <li class="page-item {{ $questions->onFirstPage() ? 'disabled' : '' }}">
+                        <a class="page-link page-button" href="{{ $questions->previousPageUrl() }}" aria-label="Previous" data-target="{{ $questions->currentPage() - 1 }}">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    @for ($i = 1; $i <= $questions->lastPage(); $i++)
+                        <li class="page-item {{ $questions->currentPage() == $i ? 'active' : '' }}">
+                            <a class="page-link page-button" href="{{ $questions->url($i) }}" data-target="{{ $i }}">{{ $i }}</a>
+                        </li>
+                    @endfor
+                    <li class="page-item {{ $questions->hasMorePages() ? '' : 'disabled' }}">
+                        <a class="page-link page-button" href="{{ $questions->nextPageUrl() }}" aria-label="Next" data-target="{{ $questions->currentPage() + 1 }}">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <form action="{{ route('forum') }}" method="GET" class="d-inline-flex ml-3">
+                <input type="number" class="form-control mr-2" style="width: 100px;" name="page" min="1" max="{{ $questions->lastPage() }}" placeholder="Page" aria-label="Page">
+                <button class="btn btn-outline-primary" type="submit">Go</button>
+            </form>
+        </div>
+    @endif
 </x-form-75-container>
 @endsection

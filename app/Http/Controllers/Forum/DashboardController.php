@@ -41,7 +41,7 @@ class DashboardController extends Controller
         
         $query->orderBy('published_at', $sortOrder);
 
-        $questions = $query->with('categories', 'user')->get();
+        $questions = $query->with('categories', 'user')->paginate(5);
 
         foreach ($questions as $question) {
             $question->comments_count = $question->comments()->count();

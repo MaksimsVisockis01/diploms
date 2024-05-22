@@ -49,10 +49,10 @@
         <p>Search results for: "{{ request('search') }}"</p>
     @endif
     
-    <x-cards id="cards">
+    <x-cards id="files-container">
         @if ($files->count() > 0)
             @foreach ($files as $file)
-                <x-card>
+                <x-card class="card-group" data-group="{{ $loop->index + 1 }}">
                     <x-settings-button>
                         @if(auth()->check() && $file->user_id == auth()->user()->id)
                             <li><a href="{{ route('files.edit', $file->id) }}" class="dropdown-item">Edit</a></li>
@@ -106,17 +106,17 @@
             <nav>
                 <ul class="pagination mb-0">
                     <li class="page-item {{ $files->onFirstPage() ? 'disabled' : '' }}">
-                        <a class="page-link" href="{{ $files->previousPageUrl() }}" aria-label="Previous">
+                        <a class="page-link page-button" href="{{ $files->previousPageUrl() }}" aria-label="Previous" data-target="{{ $files->currentPage() - 1 }}">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
                     @for ($i = 1; $i <= $files->lastPage(); $i++)
                         <li class="page-item {{ $files->currentPage() == $i ? 'active' : '' }}">
-                            <a class="page-link" href="{{ $files->url($i) }}">{{ $i }}</a>
+                            <a class="page-link page-button" href="{{ $files->url($i) }}" data-target="{{ $i }}">{{ $i }}</a>
                         </li>
                     @endfor
                     <li class="page-item {{ $files->hasMorePages() ? '' : 'disabled' }}">
-                        <a class="page-link" href="{{ $files->nextPageUrl() }}" aria-label="Next">
+                        <a class="page-link page-button" href="{{ $files->nextPageUrl() }}" aria-label="Next" data-target="{{ $files->currentPage() + 1 }}">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
