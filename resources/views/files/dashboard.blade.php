@@ -53,21 +53,23 @@
         @if ($files->count() > 0)
             @foreach ($files as $file)
                 <x-card class="card-group" data-group="{{ $loop->index + 1 }}">
-                    <x-settings-button>
-                        @if(auth()->check() && $file->user_id == auth()->user()->id)
-                            <li><a href="{{ route('files.edit', $file->id) }}" class="dropdown-item">Edit</a></li>
-                            <div class="dropdown-divider"></div>
-                        @endif
-                        @if(auth()->check() && (auth()->user()->isAdmin() || $file->user_id == auth()->id()))
-                        <li>
-                            <form action="{{ route('files.destroy', $file->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this file?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="dropdown-item mw-100">Delete</button>
-                            </form>
-                        </li>
-                        @endif
-                    </x-settings-button>
+                    @if(auth()->check() && $file->user_id == auth()->user()->id || $file->user_id == auth()->id()))
+                        <x-settings-button>
+                            @if(auth()->check() && $file->user_id == auth()->user()->id)
+                                <li><a href="{{ route('files.edit', $file->id) }}" class="dropdown-item">Edit</a></li>
+                                <div class="dropdown-divider"></div>
+                            @endif
+                            @if(auth()->check() && (auth()->user()->isAdmin() || $file->user_id == auth()->id()))
+                            <li>
+                                <form action="{{ route('files.destroy', $file->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this file?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="dropdown-item mw-100">Delete</button>
+                                </form>
+                            </li>
+                            @endif
+                        </x-settings-button>
+                    @endif
                     <x-cards-header>
                     </x-cards-header>
                     <x-cards-content>
@@ -92,7 +94,7 @@
                                 </x-none-category-container>
                             @endif
                         </x-categories-container>
-                            <x-publishing-date :uid="$file->user->uid" :published_at="$file->published_at"/>
+                            <x-publishing-date :uid="$file->user->uid" :userId="$file->user->id" :published_at="$file->published_at"/>
                     </x-cards-footer>
                 </x-card>
             @endforeach
@@ -123,7 +125,7 @@
                 </ul>
             </nav>
 
-            <form action="{{ route('dashboard') }}" method="GET" class="d-inline-flex ml-3">
+            <form action="{{ route('dashboard') }}" method="GET" class="d-inline-flex ml-3 gap-1">
                 <input type="number" class="form-control mr-2" style="width: 100px;" name="page" min="1" max="{{ $files->lastPage() }}" placeholder="Page" aria-label="Page">
                 <button class="btn btn-outline-primary" type="submit">Go</button>
             </form>

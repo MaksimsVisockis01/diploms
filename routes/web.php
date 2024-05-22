@@ -1,17 +1,11 @@
 <?php
 use App\Http\Controllers\PublicCategoryController;
-use App\Http\Controllers\Forum\DashboardController;
-use App\Http\Controllers\Forum\QuestionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\Posts\CommentController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\TestController;
-use App\Http\Middleware\LogMiddleware;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-use Termwind\Question;
+
 
 
 
@@ -36,9 +30,15 @@ Route::middleware('guest')->group(function () { //RedirectIfAuthenticated (пе�
      Route::post('login', [LoginController::class, 'store'])->name('login.store');
 });
 
-Route::middleware('auth')->group(function () {//позволяет зайти, если пользователь уже зареган
-     Route::get('logout', [LogoutController::class, 'index'])->name('logout');
-});
+Route::middleware('auth')->group(function () {
+     Route::get('/profile', [ProfileController::class, 'myProfile'])->name('profile.my');
+     Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
+     Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+     Route::post('/profile/{id}/update', [ProfileController::class, 'update'])->name('profile.update');
+     Route::get('/logout', [LogoutController::class, 'index'])->name('logout');
+ });
+
+     // Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
 
 

@@ -39,7 +39,7 @@
                             <li><a class="dropdown-item" href="{{ route('categories.index') }}">All Categories</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
+                    {{-- <li class="nav-item dropdown">
                         <div class="dropdown">
                             <form class="d-flex">
                                 <input id="search-input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -50,22 +50,39 @@
                             <ul id="search-results" class="dropdown-menu" aria-labelledby="searchDropdown">
                             </ul>
                         </div>
-                    </li>
+                    </li> --}}
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     @if(session('user_id'))
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ route('logout') }}">Logout</a>
+                        <li class="nav-item dropstart">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <ul class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="{{ route('profile.show', Auth::user()->id) }}">Profile</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                <li><a class="nav-link text-light" href="{{ route('logout') }}">Logout</a></li>
+                            </ul>
                         </li>
                     @elseif(session('admin_id'))
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ route('admin.users.index') }}">User Ctrl</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Controls
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">User Ctrl</a></li>
+                                <li><a class="nav-link text-light" href="{{ route('admin.categories.index') }}">Categories Ctrl</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ route('admin.categories.index') }}">Categories Ctrl</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ route('logout') }}">Logout</a>
+                        <li class="nav-item dropstart">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="{{ route('profile.show', Auth::user()->id) }}">Profile</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                <li><a class="nav-link text-light" href="{{ route('logout') }}">Logout</a></li>
+                            </ul>
                         </li>
                     @else
                         <li class="nav-item">
