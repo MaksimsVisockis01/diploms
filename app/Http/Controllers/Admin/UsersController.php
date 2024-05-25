@@ -5,77 +5,48 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PendingUser;
-use App\Models\User;
 
 class UsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    // public function index()
-    // {
-    //     $users = User::where('admin', false)->get(); // Fetch non-admin users
-    //     return view('admin.users.users', compact('users'));
-    // }
-    public function index()
+    public function index(Request $request)
     {
-        $pendingUsers = PendingUser::all();
-        return view('admin.users.index', compact('pendingUsers'));
+        $search = $request->input('search');
+        $sortOrder = $request->input('sort', 'desc');
+
+        $query = PendingUser::query();
+
+        if ($search) {
+            $query->where('email', 'like', '%' . $search . '%');
+        }
+
+        if ($sortOrder) {
+            switch ($sortOrder) {
+                case 'asc':
+                    $query->orderBy('created_at', 'asc');
+                    break;
+                case 'desc':
+                    $query->orderBy('created_at', 'desc');
+                    break;
+                case 'a-z':
+                    $query->orderBy('email', 'asc');
+                    break;
+                case 'z-a':
+                    $query->orderBy('email', 'desc');
+                    break;
+                default:
+                    $query->orderBy('created_at', 'desc');
+                    break;
+            }
+        }
+
+        $pendingUsers = $query->paginate(10);
+
+        return view('admin.users.index', compact('pendingUsers', 'search', 'sortOrder'));
     }
 
-    // public function destroy($id)
-    // {
-    //     $user = User::find($id);
-    //     if ($user) {
-    //         $user->delete();
-    //         return redirect()->route('admin.users.index')->with('status', 'User deleted successfully.');
-    //     } else {
-    //         return redirect()->route('admin.users.index')->with('error', 'User not found.');
-    //     }
-    // }
     public function destroy($id)
     {
         PendingUser::findOrFail($id)->delete();
         return redirect()->route('admin.users.index')->with('status', 'User deleted successfully.');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
     }
 }

@@ -24,10 +24,11 @@ class FilesController extends Controller
         $p_search = $request->input('p_search');
         $categoryFilter = $request->input('category');
         $dateFilter = $request->input('date');
+        $fileTypeFilter = $request->input('file_type');
         $sortOrder = $request->input('sort', 'desc');
-
+    
         $query = File::query();
-
+    
         if ($search || $p_search) {
             $query->where(function ($query) use ($search, $p_search) {
                 $query->where('title', 'like', '%' . ($search ?: $p_search) . '%')
@@ -39,23 +40,28 @@ class FilesController extends Controller
                       });
             });
         }
-
+    
         if ($categoryFilter) {
             $query->whereHas('categories', function ($query) use ($categoryFilter) {
                 $query->where('categories.id', $categoryFilter);
             });
         }
-
+    
         if ($dateFilter) {
             $query->whereDate('published_at', $dateFilter);
         }
-
+    
+        if ($fileTypeFilter) {
+            $query->where('file_path', 'like', '%' . $fileTypeFilter);
+        }
+    
         $query->orderBy('published_at', $sortOrder);
-
+    
         $files = $query->paginate(5);
-
+    
         return view('files.dashboard', compact('files', 'categories', 'search', 'p_search'));
     }
+
 
     public function store(Request $request)
     {
