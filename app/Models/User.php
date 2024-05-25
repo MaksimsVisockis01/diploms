@@ -15,6 +15,7 @@ class User extends Authenticatable
     protected $attributes = [
         'active' => true,
         'admin' => false,
+        'teacher' => false,
     ];
 
     protected $fillable = [
@@ -22,7 +23,7 @@ class User extends Authenticatable
 
         'active','password',
 
-        'admin',
+        'admin', 'teacher',
     ];
 
     

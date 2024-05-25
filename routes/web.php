@@ -22,13 +22,15 @@ Route::view('/', 'home.index')->name('/');
 // Route::resource('posts/{post}/comments', CommentController::class);
 Route::redirect('/home', '/')->name('home'); //переадресует с определенной адресной строки на другую(в данном случае с /home  на главную)
 
-Route::middleware('guest')->group(function () { //RedirectIfAuthenticated (переадресует пользователя если он уже залогинился)
+Route::middleware('guest')->group(function () { 
      Route::get('register', [RegisterController::class, 'index'])->name('register');
      Route::post('register', [RegisterController::class, 'store'])->name('register.store');
-
+     Route::get('register/complete/{token}', [RegisterController::class, 'complete'])->name('register.complete');
+     Route::post('register/finalize', [RegisterController::class, 'finalize'])->name('register.finalize');
+ 
      Route::get('login', [LoginController::class, 'index'])->name('login');
      Route::post('login', [LoginController::class, 'store'])->name('login.store');
-});
+ });
 
 Route::middleware('auth')->group(function () {
      Route::get('/profile', [ProfileController::class, 'myProfile'])->name('profile.my');

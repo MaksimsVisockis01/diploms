@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\PendingUser;
 use App\Models\User;
 
 class UsersController extends Controller
@@ -11,21 +12,31 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function index()
+    // {
+    //     $users = User::where('admin', false)->get(); // Fetch non-admin users
+    //     return view('admin.users.users', compact('users'));
+    // }
     public function index()
     {
-        $users = User::where('admin', false)->get(); // Fetch non-admin users
-        return view('admin.users.users', compact('users'));
+        $pendingUsers = PendingUser::all();
+        return view('admin.users.index', compact('pendingUsers'));
     }
 
+    // public function destroy($id)
+    // {
+    //     $user = User::find($id);
+    //     if ($user) {
+    //         $user->delete();
+    //         return redirect()->route('admin.users.index')->with('status', 'User deleted successfully.');
+    //     } else {
+    //         return redirect()->route('admin.users.index')->with('error', 'User not found.');
+    //     }
+    // }
     public function destroy($id)
     {
-        $user = User::find($id);
-        if ($user) {
-            $user->delete();
-            return redirect()->route('admin.users.index')->with('status', 'User deleted successfully.');
-        } else {
-            return redirect()->route('admin.users.index')->with('error', 'User not found.');
-        }
+        PendingUser::findOrFail($id)->delete();
+        return redirect()->route('admin.users.index')->with('status', 'User deleted successfully.');
     }
 
     /**

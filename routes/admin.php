@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\RegisterController;
 use App\Http\Middleware\LogMiddleware;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -11,7 +12,8 @@ Route::redirect('admin', '/admin/index')->name('admin');
 Route::prefix('admin')->group(function () {
     Route::middleware('auth')->middleware('admin')->group(function () {
         Route::get('users', [UsersController::class, 'index'])->name('admin.users.index');
-        Route::delete('users/{user_id}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
+        Route::post('users/approve/{id}', [RegisterController::class, 'approve'])->name('admin.users.approve');
+        Route::delete('users/{id}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
 
         Route::get('categories', [CategoryController::class, 'index'])->name('admin.categories.index');
         Route::delete('categories/{category_id}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
