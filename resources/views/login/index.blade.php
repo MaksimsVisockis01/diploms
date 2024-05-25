@@ -7,9 +7,9 @@
 @section('content')
 
 <x-form-container>
-    <x-forms-header>
+    <x-forms-heading>
         Login
-    </x-forms-header>
+    </x-forms-heading>
     <form action="{{ route('login.store') }}" method="POST">
         {{ csrf_field() }}
         <x-form-wrapper>

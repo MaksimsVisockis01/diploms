@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Termwind\Question;
 
+Route::middleware('active')->group(function () {
 Route::redirect('files', '/files/dashboard')->name('files');
 
 Route::prefix('files')->group(function () {
@@ -20,7 +21,7 @@ Route::prefix('files')->group(function () {
      Route::get('dashboard', [FilesController::class, 'dashboard'])->name('dashboard');
 
 });
-
+});
 // Route::redirect('forum', '/forum/dashboard')->name('forum');
 
 // Route::prefix('forum')->group(function () {

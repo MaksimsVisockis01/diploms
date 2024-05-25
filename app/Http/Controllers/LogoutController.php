@@ -12,6 +12,6 @@ class LogoutController extends Controller
         Session::forget('user_id');
 
         auth()->logout();
-        return redirect()->route('home');
+        return redirect()->route('forum');
     }
 }

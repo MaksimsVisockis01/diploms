@@ -24,7 +24,7 @@ class LoginController extends Controller
                 Session::put('user_id', $user->id);
             }
 
-            return redirect()->route('/');
+            return redirect()->route('forum');
         }
         
         return back()->withErrors(['uid' => 'wrond username', 'password' => 'wrond password']);

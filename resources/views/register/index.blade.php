@@ -5,7 +5,9 @@
 @section('content')
 <section class="my-5 border p-4 mx-auto w-50">
     <div>
-        <h1>Sign up</h1>
+        <x-forms-heading>
+            Sign up
+        </x-forms-heading>
         <form action="{{ route('register.store') }}" method="POST">
             @csrf
             <div class="mb-3">

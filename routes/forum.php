@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Termwind\Question;
 
-Route::redirect('forum', '/forum/dashboard')->name('forum');
-
-Route::prefix('forum')->group(function () {
-
+Route::middleware('active')->group(function () {
      
+Route::redirect('forum', '/forum/dashboard')->name('forum');
+Route::middleware('auth')->group(function () {
+     Route::redirect('/', '/forum/dashboard')->name('forum');
+});
+Route::prefix('forum')->group(function () {
      Route::middleware('auth')->group(function () { //позволяет зайти, если пользователь уже зареган
           Route::get('question', [QuestionController::class, 'index'])->name('question');
           Route::post('question', [QuestionController::class, 'store'])->name('question.store');
@@ -31,4 +33,5 @@ Route::prefix('forum')->group(function () {
      Route::get('question/{question_id}', [QuestionController::class, 'show'])->name('question.show');
 
      Route::post('question/{question_id}/comments', [CommentController::class, 'store'])->name('question.comment.store');
+});
 });

@@ -15,7 +15,10 @@
 <body>
     <nav class="navbar bg-dark navbar-expand-lg border-bottom border-body" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-light" href="/">Logo</a>
+            @if(session('user_id') || session('user_id'))
+                <a class="navbar-brand text-light" href="/">Hello!</a>
+            @endif
+            <a class="navbar-brand text-light" href="{{ route('register') }}">Hello!</a>
             <button class="navbar-toggler btn bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -70,7 +73,8 @@
                                 Controls
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">User Ctrl</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">Pending users Ctrl</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.users.usercontrol') }}">Manage users</a></li>
                                 <li><a class="nav-link text-light" href="{{ route('admin.categories.index') }}">Categories Ctrl</a></li>
                             </ul>
                         </li>
@@ -88,9 +92,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" href="{{ route('login') }}">Log In</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ route('register') }}">Sign Up</a>
-                        </li>
+                        {{-- <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ route('register') }}">Register</a>
+                        </li> --}}
                     @endif
                 </ul>
             </div>
