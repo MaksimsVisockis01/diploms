@@ -41,5 +41,6 @@
             <button type="submit" class="btn btn-primary">Update</button>
         </x-form-wrapper>
     </form>
+    <a href="{{ route('files') }}" class="">Back to files</a>
 </x-form-75-container>
 @endsection

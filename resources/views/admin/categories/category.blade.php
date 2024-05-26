@@ -6,7 +6,6 @@
 
 @section('content')
 
-{{-- form --}}
 <section class="my-5 border p-4 mx-auto w-50">
     <div class="category-form">
         <h1>Create category</h1>

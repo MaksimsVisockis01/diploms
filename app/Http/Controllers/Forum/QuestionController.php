@@ -57,9 +57,10 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        $question = Question::with('user')->findOrFail($id); 
+        $question = Question::findOrFail($id);
+        $comments = $question->comments()->paginate(5);
 
-        return view('forum.question.show', compact('question'));
+        return view('forum.question.show', compact('question', 'comments'));
     }
 
     /**

@@ -6,7 +6,7 @@
 <x-form-75-container>
     <x-forms-header>
         <x-forms-heading>Files</x-forms-heading>
-        @if(session('user_id'))
+        @if(auth()->check())
         <x-search-container action="{{ route('dashboard') }}" method="GET">
             <input class="form-control mr-2" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ request('search') }}">
             <button class="btn btn-outline-primary" type="submit">Search</button>
@@ -14,46 +14,46 @@
         @endif
     </x-forms-header>
     
-    @if(session('user_id'))
-    <x-filter-container>
-        <form action="{{ route('dashboard') }}" method="GET">
-            @csrf
-            <x-filters-container>
-                <x-filter-parametr-container>
-                    <select class="form-control" name="category">
-                        <option value="">All Categories</option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
-                                {{ $category->title }}
-                            </option>
-                        @endforeach
-                    </select>
-                </x-filter-parametr-container>
-                <x-filter-parametr-container>
-                    <input type="date" class="form-control" name="date" value="{{ request('date') }}">
-                </x-filter-parametr-container>
-                <x-filter-parametr-container>
-                    <select class="form-control" id="sort" name="sort">
-                        <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Descending</option>
-                        <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>Ascending</option>
-                    </select>
-                </x-filter-parametr-container>
-                <x-filter-parametr-container>
-                    <select class="form-control" name="file_type">
-                        <option value="">All File Types</option>
-                        <option value="pdf" {{ request('file_type') == 'pdf' ? 'selected' : '' }}>PDF</option>
-                        <option value="doc" {{ request('file_type') == 'doc' ? 'selected' : '' }}>DOC</option>
-                        <option value="docx" {{ request('file_type') == 'docx' ? 'selected' : '' }}>DOCX</option>
-                    </select>
-                </x-filter-parametr-container>
-                <x-filter-parametr-container>
-                    <button class="btn btn-outline-primary" type="submit">Filter</button>
-                </x-filter-parametr-container>
-            </x-filters-container>
-        </form>
-    </x-filter-container>
+    @if(auth()->check())
+        <x-filter-container>
+            <form action="{{ route('dashboard') }}" method="GET">
+                @csrf
+                <x-filters-container>
+                    <x-filter-parametr-container>
+                        <select class="form-control" name="category">
+                            <option value="">All Categories</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </x-filter-parametr-container>
+                    <x-filter-parametr-container>
+                        <input type="date" class="form-control" name="date" value="{{ request('date') }}">
+                    </x-filter-parametr-container>
+                    <x-filter-parametr-container>
+                        <select class="form-control" id="sort" name="sort">
+                            <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Descending</option>
+                            <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>Ascending</option>
+                        </select>
+                    </x-filter-parametr-container>
+                    <x-filter-parametr-container>
+                        <select class="form-control" name="file_type">
+                            <option value="">All File Types</option>
+                            <option value="pdf" {{ request('file_type') == 'pdf' ? 'selected' : '' }}>PDF</option>
+                            <option value="doc" {{ request('file_type') == 'doc' ? 'selected' : '' }}>DOC</option>
+                            <option value="docx" {{ request('file_type') == 'docx' ? 'selected' : '' }}>DOCX</option>
+                        </select>
+                    </x-filter-parametr-container>
+                    <x-filter-parametr-container>
+                        <button class="btn btn-outline-primary" type="submit">Filter</button>
+                    </x-filter-parametr-container>
+                </x-filters-container>
+            </form>
+        </x-filter-container>
     @endif
-
+    <x-alert/>
     <x-form-wrapper>
         @if(auth()->check() && (auth()->user()->teacher || auth()->user()->admin))
             <a href="{{ route('addfile') }}" class="btn btn-primary">Add File</a>

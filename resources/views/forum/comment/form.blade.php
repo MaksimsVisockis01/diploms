@@ -1,4 +1,4 @@
-<x-comment-container>
+<x-comment-form>
     <x-mini-forms-header>
         Add Comment
     </x-mini-forms-header>
@@ -11,4 +11,4 @@
             <button type="submit" class="btn btn-primary mt-3">Submit Comment</button>
         </x-form-wrapper>
     </form>
-</x-form-container>
+</x-comment-form>

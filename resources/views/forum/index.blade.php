@@ -51,7 +51,7 @@
     <x-cards id="forum-container">
         @foreach($questions as $question)
             <x-card class="card-group" data-group="{{ $loop->index + 1 }}">
-                @if(auth()->check() && $question->user_id == auth()->user()->id || $question->user_id == auth()->id())
+                @if(auth()->check() && ($question->user_id == auth()->user()->id || auth()->user()->isAdmin()))
                     <x-settings-button>
                         @if(auth()->check() && $question->user_id == auth()->user()->id)
                         <li><a href="{{ route('question.edit', $question->id) }}" class="dropdown-item">Edit</a></li>

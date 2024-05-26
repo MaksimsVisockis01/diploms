@@ -4,9 +4,9 @@
 
 @section('content')
 <x-form-container>
-    <x-mini-forms-header>
+    <x-forms-heading>
         Add File
-    </x-mini-forms-header>
+    </x-forms-heading>
     <form action="{{ route('addfile.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <x-form-wrapper>

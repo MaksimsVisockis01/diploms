@@ -12,14 +12,12 @@ class CategoryController extends Controller
     {
         $query = Category::query();
 
-        // Search functionality
         if ($request->filled('search')) {
             $search = $request->input('search');
             $query->where('title', 'like', "%{$search}%")
                   ->orWhere('description', 'like', "%{$search}%");
         }
 
-        // Sorting functionality
         if ($request->filled('sort')) {
             switch ($request->input('sort')) {
                 case 'title-asc':
@@ -43,7 +41,6 @@ class CategoryController extends Controller
             }
         }
 
-        // Pagination
         $categories = $query->paginate(10);
 
         return view('admin.categories.categories', compact('categories'));

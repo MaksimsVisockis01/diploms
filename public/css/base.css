@@ -16,3 +16,8 @@
 .w-40{
     width: 40%;
 }
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

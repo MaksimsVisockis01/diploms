@@ -5,33 +5,25 @@ namespace App\Http\Controllers\Forum;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Question_Comment;
+use App\Models\Question;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, $questionId)
     {
         if(auth()->check()){
             $validated = $request->validate([
-                'text' =>['required', 'string','max:100'],
+                'text' => ['required', 'string', 'max:100'],
             ]);
 
             $comment = Question_Comment::create([
@@ -42,23 +34,16 @@ class CommentController extends Controller
             ]);
 
             return redirect()->route('question.show', ['question_id' => $questionId])->with('status', 'Comment added successfully!');
-        }   else{
+        } else {
             return redirect()->route('question')->with('status', 'Failed');
         }
-
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($questionId, $commentId)
     {
         $comment = Question_Comment::findOrFail($commentId);
@@ -66,9 +51,6 @@ class CommentController extends Controller
         return view('forum.comment.edit', compact('comment'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $questionId, $commentId)
     {
         $comment = Question_Comment::findOrFail($commentId);
@@ -84,9 +66,6 @@ class CommentController extends Controller
         return redirect()->route('question.show', ['question_id' => $questionId])->with('status', 'Comment updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($questionId, $commentId)
     {
         $comment = Question_Comment::findOrFail($commentId);

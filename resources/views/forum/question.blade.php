@@ -8,9 +8,9 @@
 
 {{-- create question form --}}
 <x-form-container>
-    <x-mini-forms-header>
+    <x-forms-heading>
         Create question
-    </x-mini-forms-header>
+    </x-forms-heading>
     <form action="{{ route('question.store') }}" method="POST">
         @csrf
         <x-form-wrapper>

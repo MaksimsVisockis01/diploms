@@ -14,18 +14,6 @@
             </x-search-container>
         </x-forms-header>
 
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
-
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-
         <p><a href="{{ route('admin.category.create') }}" class="btn btn-primary">Create category</a></p>
 
         <x-filter-container>
@@ -50,6 +38,8 @@
             </form>
         </x-filter-container>
 
+        <x-alert/>
+        
         @if ($categories->count() > 0)
             <table class="table table-bordered">
                 <thead>

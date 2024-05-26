@@ -11,7 +11,7 @@ Route::view('/inactive', 'inactive')->name('inactive');
 Route::middleware('active')->group(function () {
 Route::get('/categories', [PublicCategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{id}', [PublicCategoryController::class, 'show'])->name('category.show');
-
+Route::get('/categories/file/{file}', [PublicCategoryController::class, 'downloadFile'])->name('categories.file');
 
 // Route::get('test', TestController::class)->name('test');
 // Route::resource('posts/{post}/comments', CommentController::class);

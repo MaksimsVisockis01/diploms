@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center">
+<div class="d-flex">
     <h3>
         {{ $slot }}
     </h3>
