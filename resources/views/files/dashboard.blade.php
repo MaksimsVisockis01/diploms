@@ -6,12 +6,15 @@
 <x-form-75-container>
     <x-forms-header>
         <x-forms-heading>Files</x-forms-heading>
+        @if(session('user_id'))
         <x-search-container action="{{ route('dashboard') }}" method="GET">
             <input class="form-control mr-2" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ request('search') }}">
             <button class="btn btn-outline-primary" type="submit">Search</button>
         </x-search-container>
+        @endif
     </x-forms-header>
-
+    
+    @if(session('user_id'))
     <x-filter-container>
         <form action="{{ route('dashboard') }}" method="GET">
             @csrf
@@ -49,6 +52,7 @@
             </x-filters-container>
         </form>
     </x-filter-container>
+    @endif
 
     <x-form-wrapper>
         @if(auth()->check() && (auth()->user()->teacher || auth()->user()->admin))

@@ -1,6 +1,10 @@
 @extends('layouts.base')
 
 @section('content')
+
+@section('page.title')
+    Users
+@endsection
 <x-users-table-container>
     <x-forms-header>
         <x-forms-heading>Users</x-forms-heading>

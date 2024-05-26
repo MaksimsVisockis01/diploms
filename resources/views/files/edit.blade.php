@@ -11,24 +11,24 @@
             <x-forms-heading>Edit File</x-forms-heading>
         </x-forms-header>
         <x-form-wrapper>
-            <div class="form-group">
+            <x-form-wrapper>
                 <label for="title">Title</label>
                 <input type="text" name="title" class="form-control" value="{{ $file->title }}" required>
-            </div>
-            <div class="form-group">
+            </x-form-wrapper>
+            <x-form-wrapper>
                 <label for="author">Author</label>
                 <input type="text" name="author" class="form-control" value="{{ $file->author }}" required>
-            </div>
-            <div class="form-group">
+            </x-form-wrapper>
+            <x-form-wrapper>
                 <label for="description">Description</label>
                 <textarea name="description" class="form-control" required>{{ $file->description }}</textarea>
-            </div>
-            <div class="form-group">
+            </x-form-wrapper>
+            <x-form-wrapper>
                 <label for="file">File</label>
                 <input type="file" name="file" class="form-control">
                 <small class="form-text text-muted">Leave blank to keep the current file</small>
-            </div>
-            <div class="form-group">
+            </x-form-wrapper>
+            <x-form-wrapper>
                 <label for="category_id">Categories</label>
                 <select name="category_id[]" class="form-control" multiple>
                     @foreach($categories as $category)
@@ -37,7 +37,7 @@
                         </option>
                     @endforeach
                 </select>
-            </div>
+            </x-form-wrapper>
             <button type="submit" class="btn btn-primary">Update</button>
         </x-form-wrapper>
     </form>

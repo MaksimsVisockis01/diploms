@@ -15,10 +15,11 @@
 <body>
     <nav class="navbar bg-dark navbar-expand-lg border-bottom border-body" data-bs-theme="dark">
         <div class="container-fluid">
-            @if(session('user_id') || session('user_id'))
+            @if(session('user_id'))
                 <a class="navbar-brand text-light" href="/">Hello!</a>
-            @endif
+            @else
             <a class="navbar-brand text-light" href="{{ route('register') }}">Hello!</a>
+            @endif
             <button class="navbar-toggler btn bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -75,7 +76,8 @@
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">Pending users Ctrl</a></li>
                                 <li><a class="dropdown-item" href="{{ route('admin.users.usercontrol') }}">Manage users</a></li>
-                                <li><a class="nav-link text-light" href="{{ route('admin.categories.index') }}">Categories Ctrl</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.categories.index') }}">Categories Ctrl</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropstart">
