@@ -15,7 +15,7 @@ Route::middleware('auth')->group(function () {
      Route::redirect('/', '/forum/dashboard')->name('forum');
 });
 Route::prefix('forum')->group(function () {
-     Route::middleware('auth')->group(function () { //позволяет зайти, если пользователь уже зареган
+     Route::middleware('auth')->group(function () {
           Route::get('question', [QuestionController::class, 'index'])->name('question');
           Route::post('question', [QuestionController::class, 'store'])->name('question.store');
 

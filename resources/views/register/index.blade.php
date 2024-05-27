@@ -17,7 +17,7 @@
                     <div class="invalid-feedback">{{ $errors->first('email') }}</div>
                 @endif
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
         </form>
         @if (session('status'))
             <div class="success">{{ session('status') }}</div>

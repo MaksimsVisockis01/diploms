@@ -94,9 +94,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" href="{{ route('login') }}">Log In</a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ route('register') }}">Register</a>
-                        </li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ route('register') }}">Sign Up</a>
+                        </li>
                     @endif
                 </ul>
             </div>

@@ -12,7 +12,6 @@ class ManageUserController extends Controller
     {
         $query = User::where('admin', false);
 
-        // Search functionality
         if ($request->filled('search')) {
             $search = $request->input('search');
             $query->where(function($query) use ($search) {
@@ -21,19 +20,16 @@ class ManageUserController extends Controller
             });
         }
 
-        // Filter by active status
         if ($request->filled('active')) {
             $active = $request->input('active');
             $query->where('active', $active);
         }
 
-        // Filter by teacher status
         if ($request->filled('teacher')) {
             $teacher = $request->input('teacher');
             $query->where('teacher', $teacher);
         }
 
-        // Sorting functionality
         if ($request->filled('sort')) {
             switch ($request->input('sort')) {
                 case 'name-asc':
@@ -51,7 +47,6 @@ class ManageUserController extends Controller
             }
         }
 
-        // Pagination
         $users = $query->paginate(10);
 
         return view('admin.users.usercontrol', compact('users'));

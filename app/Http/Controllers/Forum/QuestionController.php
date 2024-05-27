@@ -15,12 +15,6 @@ class QuestionController extends Controller
         $categories = Category::all();
         return view('forum.question', compact('categories'));
     }
-
-    public function create()
-    {
-        //
-    }
-
     public function store(Request $request)
     {
 
@@ -52,9 +46,6 @@ class QuestionController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         $question = Question::findOrFail($id);
@@ -63,9 +54,6 @@ class QuestionController extends Controller
         return view('forum.question.show', compact('question', 'comments'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $question = Question::findOrFail($id);
