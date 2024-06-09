@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Question;
+use App\Models\Question_Comment;
+use App\Models\File;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -12,21 +15,21 @@ class ProfileController extends Controller
     public function myProfile()
     {
         $user = Auth::user();
-        $questionsCount = $user->questions()->count();
-        $filesCount = $user->files()->count();
-        $commentsCount = $user->comments()->count();
+        $questions = $user->questions()->paginate(10);
+        $comments = $user->comments()->paginate(10);
+        $files = $user->files()->paginate(10);
 
-        return view('profile.show', compact('user', 'questionsCount', 'filesCount', 'commentsCount'));
+        return view('profile.show', compact('user', 'questions', 'comments', 'files'));
     }
 
     public function show($id)
     {
         $user = User::findOrFail($id);
-        $questionsCount = $user->questions()->count();
-        $filesCount = $user->files()->count();
-        $commentsCount = $user->comments()->count();
+        $questions = $user->questions()->paginate(10);
+        $comments = $user->comments()->paginate(10);
+        $files = $user->files()->paginate(10);
 
-        return view('profile.show', compact('user', 'questionsCount', 'filesCount', 'commentsCount'));
+        return view('profile.show', compact('user', 'questions', 'comments', 'files'));
     }
 
     public function edit($id)
@@ -49,7 +52,6 @@ class ProfileController extends Controller
         }
 
         $request->validate([
-            'name' => 'required|string|max:255',
             'uid' => 'required|string|max:255|unique:users,uid,' . $user->id,
             'avatar' => 'nullable|image|max:8192', // max 8MB
             'password' => 'nullable|string|min:8|confirmed',
@@ -69,7 +71,6 @@ class ProfileController extends Controller
             }
         }
 
-        $user->name = $request->input('name');
         $user->uid = $request->input('uid');
         $user->save();
 

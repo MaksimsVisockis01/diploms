@@ -31,6 +31,8 @@ Route::prefix('admin')->group(function () {
         Route::post('category', [CategoryController::class, 'store'])->name('admin.category.store');
         Route::get('category/{category_id}/edit', [CategoryController::class, 'edit'])->name('admin.category.edit');
         Route::put('category/{category_id}', [CategoryController::class, 'update'])->name('admin.category.update');
+
+        Route::get('/admin/statistics', [App\Http\Controllers\Admin\StatisticsController::class, 'index'])->name('admin.statistics');
     });
 });
 });
