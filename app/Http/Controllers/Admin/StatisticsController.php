@@ -9,107 +9,70 @@ use App\Models\File;
 use App\Models\Question;
 use App\Models\Question_Comment;
 use Carbon\Carbon;
+use DB;
 
 class StatisticsController extends Controller
 {
-    public function userStatistics(Request $request)
+    public function index(Request $request)
     {
         $dateFilter = $request->input('date_filter', 'daily');
         $date = $request->input('date');
-        $startDate = Carbon::parse($date ?: Carbon::now())->startOfDay();
-        $endDate = Carbon::parse($date ?: Carbon::now())->endOfDay();
+        $intervals = $request->input('intervals', 7); // Default to 7 intervals
+        $currentDate = Carbon::parse($date ?: Carbon::now());
 
-        if ($dateFilter == 'weekly') {
-            $startDate = Carbon::parse($date ?: Carbon::now())->startOfWeek();
-        } elseif ($dateFilter == 'monthly') {
-            $startDate = Carbon::parse($date ?: Carbon::now())->startOfMonth();
-        } elseif ($dateFilter == 'yearly') {
-            $startDate = Carbon::parse($date ?: Carbon::now())->startOfYear();
+        switch ($dateFilter) {
+            case 'weekly':
+                $startDate = $currentDate->copy()->subWeeks($intervals)->startOfWeek();
+                $endDate = $currentDate->endOfWeek();
+                $dateFormat = '%Y-%u'; // Weekly format
+                break;
+            case 'monthly':
+                $startDate = $currentDate->copy()->subMonths($intervals)->startOfMonth();
+                $endDate = $currentDate->endOfMonth();
+                $dateFormat = '%Y-%m'; // Monthly format
+                break;
+            case 'yearly':
+                $startDate = $currentDate->copy()->subYears($intervals)->startOfYear();
+                $endDate = $currentDate->endOfYear();
+                $dateFormat = '%Y'; // Yearly format
+                break;
+            case 'daily':
+            default:
+                $startDate = $currentDate->copy()->subDays($intervals)->startOfDay();
+                $endDate = $currentDate->endOfDay();
+                $dateFormat = '%Y-%m-%d'; // Daily format
+                break;
         }
 
-        // Диаграммы
-        $userStats = User::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+        $userStats = User::select(DB::raw("DATE_FORMAT(created_at, '$dateFormat') as date"), DB::raw('COUNT(*) as count'))
             ->where('admin', false)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('date')
+            ->orderBy('date')
             ->get()
             ->toArray();
 
-        return view('admin.statistics.users', compact('userStats', 'dateFilter', 'date'));
-    }
-
-    public function fileStatistics(Request $request)
-    {
-        $dateFilter = $request->input('date_filter', 'daily');
-        $date = $request->input('date');
-        $startDate = Carbon::parse($date ?: Carbon::now())->startOfDay();
-        $endDate = Carbon::parse($date ?: Carbon::now())->endOfDay();
-
-        if ($dateFilter == 'weekly') {
-            $startDate = Carbon::parse($date ?: Carbon::now())->startOfWeek();
-        } elseif ($dateFilter == 'monthly') {
-            $startDate = Carbon::parse($date ?: Carbon::now())->startOfMonth();
-        } elseif ($dateFilter == 'yearly') {
-            $startDate = Carbon::parse($date ?: Carbon::now())->startOfYear();
-        }
-
-        // Диаграммы
-        $fileStats = File::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+        $fileStats = File::select(DB::raw("DATE_FORMAT(created_at, '$dateFormat') as date"), DB::raw('COUNT(*) as count'))
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('date')
+            ->orderBy('date')
             ->get()
             ->toArray();
 
-        return view('admin.statistics.files', compact('fileStats', 'dateFilter', 'date'));
-    }
-
-    public function questionStatistics(Request $request)
-    {
-        $dateFilter = $request->input('date_filter', 'daily');
-        $date = $request->input('date');
-        $startDate = Carbon::parse($date ?: Carbon::now())->startOfDay();
-        $endDate = Carbon::parse($date ?: Carbon::now())->endOfDay();
-
-        if ($dateFilter == 'weekly') {
-            $startDate = Carbon::parse($date ?: Carbon::now())->startOfWeek();
-        } elseif ($dateFilter == 'monthly') {
-            $startDate = Carbon::parse($date ?: Carbon::now())->startOfMonth();
-        } elseif ($dateFilter == 'yearly') {
-            $startDate = Carbon::parse($date ?: Carbon::now())->startOfYear();
-        }
-
-        // Диаграммы
-        $questionStats = Question::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+        $questionStats = Question::select(DB::raw("DATE_FORMAT(created_at, '$dateFormat') as date"), DB::raw('COUNT(*) as count'))
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('date')
+            ->orderBy('date')
             ->get()
             ->toArray();
 
-        return view('admin.statistics.questions', compact('questionStats', 'dateFilter', 'date'));
-    }
-
-    public function commentStatistics(Request $request)
-    {
-        $dateFilter = $request->input('date_filter', 'daily');
-        $date = $request->input('date');
-        $startDate = Carbon::parse($date ?: Carbon::now())->startOfDay();
-        $endDate = Carbon::parse($date ?: Carbon::now())->endOfDay();
-
-        if ($dateFilter == 'weekly') {
-            $startDate = Carbon::parse($date ?: Carbon::now())->startOfWeek();
-        } elseif ($dateFilter == 'monthly') {
-            $startDate = Carbon::parse($date ?: Carbon::now())->startOfMonth();
-        } elseif ($dateFilter == 'yearly') {
-            $startDate = Carbon::parse($date ?: Carbon::now())->startOfYear();
-        }
-
-        // Диаграммы
-        $commentStats = Question_Comment::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+        $commentStats = Question_Comment::select(DB::raw("DATE_FORMAT(created_at, '$dateFormat') as date"), DB::raw('COUNT(*) as count'))
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('date')
+            ->orderBy('date')
             ->get()
             ->toArray();
 
-        return view('admin.statistics.comments', compact('commentStats', 'dateFilter', 'date'));
+        return view('admin.statistics.index', compact('userStats', 'fileStats', 'questionStats', 'commentStats', 'dateFilter', 'date', 'intervals'));
     }
 }

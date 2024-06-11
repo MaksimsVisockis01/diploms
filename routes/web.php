@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\BroadcastController;
 use App\Http\Controllers\PublicCategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function () {
      Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
      Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
      Route::post('/profile/{id}/update', [ProfileController::class, 'update'])->name('profile.update');
+     Route::get('/broadcasting', [BroadcastController::class, 'index'])->name('broadcast.index');
+     Route::get('/start-broadcast', [BroadcastController::class, 'start'])->middleware('can.start.broadcast')->name('broadcast.start');
      });
      Route::get('/logout', [LogoutController::class, 'index'])->name('logout');
  });

@@ -27,10 +27,10 @@ Route::middleware('active')->group(function () {
             Route::get('category/{category_id}/edit', [CategoryController::class, 'edit'])->name('admin.category.edit');
             Route::put('category/{category_id}', [CategoryController::class, 'update'])->name('admin.category.update');
 
-            Route::get('statistics/users', [StatisticsController::class, 'userStatistics'])->name('admin.statistics.users');
-            Route::get('statistics/files', [StatisticsController::class, 'fileStatistics'])->name('admin.statistics.files');
-            Route::get('statistics/questions', [StatisticsController::class, 'questionStatistics'])->name('admin.statistics.questions');
-            Route::get('statistics/comments', [StatisticsController::class, 'commentStatistics'])->name('admin.statistics.comments');
+            Route::get('/admin/statistics', [App\Http\Controllers\Admin\StatisticsController::class, 'index'])->name('admin.statistics');
+            Route::delete('/admin/statistics/questionscontrol/{id}', [App\Http\Controllers\Admin\StatisticsController::class, 'deleteQuestion'])->name('admin.questionscontrol.delete');
+            Route::delete('/admin/statistics/commentscontrol/{id}', [App\Http\Controllers\Admin\StatisticsController::class, 'deleteComment'])->name('admin.commentscontrol.delete');
+            Route::delete('/admin/statistics/filescontrol/{id}', [App\Http\Controllers\Admin\StatisticsController::class, 'deleteFile'])->name('admin.filescontrol.delete');
         });
     });
 });

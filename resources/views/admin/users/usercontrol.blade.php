@@ -89,7 +89,6 @@
         </tbody>
     </table>
 
-    <!-- Pagination -->
     @if ($users->lastPage() > 1)
         <div class="d-flex justify-content-between align-items-center mt-4">
             <nav>
