@@ -81,7 +81,10 @@
                                     
                                 <li><a class="dropdown-item" href="{{ route('admin.categories.index') }}">Categories Ctrl</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.statistics') }}">Statistics</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.statistics.users') }}">User Statistics</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.statistics.files') }}">File Statistics</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.statistics.questions') }}">Question Statistics</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.statistics.comments') }}">Comment Statistics</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropstart">
@@ -201,83 +204,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     initializePagination('forum-container', 'page-button');
 });
-// $(document).ready(function(){
-//         $('.dropdown').on('click', function(event){
-//             $(this).find('.dropdown-menu').toggleClass('show');
-//             event.stopPropagation();
-//         });
-//     });
-
-//     $(document).click(function(event) {
-//         if (!$(event.target).closest('.dropdown').length) {
-//             $('.dropdown-menu').removeClass('show');
-//         }
-//     });
     </script>
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function showChart(chartId) {
-                document.querySelectorAll('.chart-container').forEach(container => {
-                    container.style.display = 'none';
-                });
-                document.getElementById(chartId + 'Container').style.display = 'block';
-            }
-
-            function filterData() {
-                const filter = document.getElementById('filter').value;
-                window.location.href = `{{ route('admin.statistics') }}?filter=${filter}`;
-            }
-
-            const usersData = @json($users);
-            const questionsData = @json($questions);
-            const commentsData = @json($comments);
-
-            const usersChartCtx = document.getElementById('usersChart').getContext('2d');
-            const questionsChartCtx = document.getElementById('questionsChart').getContext('2d');
-            const commentsChartCtx = document.getElementById('commentsChart').getContext('2d');
-
-            const usersChart = new Chart(usersChartCtx, {
-                type: 'line',
-                data: {
-                    labels: usersData.map(item => item.date),
-                    datasets: [{
-                        label: 'Number of Registrations',
-                        data: usersData.map(item => item.count),
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1,
-                        fill: false
-                    }]
-                }
-            });
-
-            const questionsChart = new Chart(questionsChartCtx, {
-                type: 'line',
-                data: {
-                    labels: questionsData.map(item => item.date),
-                    datasets: [{
-                        label: 'Number of Questions',
-                        data: questionsData.map(item => item.count),
-                        borderColor: 'rgba(153, 102, 255, 1)',
-                        borderWidth: 1,
-                        fill: false
-                    }]
-                }
-            });
-
-            const commentsChart = new Chart(commentsChartCtx, {
-                type: 'line',
-                data: {
-                    labels: commentsData.map(item => item.date),
-                    datasets: [{
-                        label: 'Number of Comments',
-                        data: commentsData.map(item => item.count),
-                        borderColor: 'rgba(255, 159, 64, 1)',
-                        borderWidth: 1,
-                        fill: false
-                    }]
-                }
-            });
-        });
-    </script> --}}
+    @stack('scripts')
 </body>
 </html>
