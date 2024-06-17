@@ -10,6 +10,7 @@
     <x-forms-heading>
         Login
     </x-forms-heading>
+    
     <form action="{{ route('login.store') }}" method="POST">
         {{ csrf_field() }}
         <x-form-wrapper>

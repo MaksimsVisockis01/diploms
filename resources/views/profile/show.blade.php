@@ -6,7 +6,7 @@
 <x-profile-container>
     <x-profile-header>
         <div class="text-left">
-            <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('images/default-avatar.png') }}" alt="Avatar" class="img-fluid border rounded-circle mb-3" width="150">
+            <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/avatars/default-avatar.png') }}" alt="Avatar" class="img-fluid border rounded-circle mb-3" width="150">
             <h3>{{ $user->uid }}</h3>
             <p><strong>Joined:</strong> {{ $user->created_at->format('d M Y') }}</p>
         </div>

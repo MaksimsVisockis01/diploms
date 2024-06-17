@@ -53,7 +53,7 @@
             </form>
         </x-filter-container>
     @endif
-    <x-alert/>
+    <x-alert></x-alert>
     <x-form-wrapper>
         @if(auth()->check() && (auth()->user()->teacher || auth()->user()->admin))
             <a href="{{ route('addfile') }}" class="btn btn-primary">Add File</a>

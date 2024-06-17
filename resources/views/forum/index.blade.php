@@ -41,7 +41,7 @@
             </x-filters-container>
         </form>
     </x-filter-container>
-
+    <x-alert></x-alert>
     <x-form-wrapper>
         <a href="{{ route('question') }}" class="btn btn-primary">Create Question</a>
     </x-form-wrapper>

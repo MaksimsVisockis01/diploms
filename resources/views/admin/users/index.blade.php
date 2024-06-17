@@ -30,9 +30,10 @@
             </x-filters-container>
         </form>
     </x-filter-container>
-    @if (session('status'))
+    <x-alert></x-alert>
+    {{-- @if (session('status'))
         <div class="alert alert-success">{{ session('status') }}</div>
-    @endif
+    @endif --}}
     <table class="table table-bordered">
         <thead>
             <tr>

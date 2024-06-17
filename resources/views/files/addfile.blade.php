@@ -39,7 +39,7 @@
         </x-form-wrapper>
         <x-forms-footer>
             <button type="submit" class="btn btn-primary">Upload File</button>
-            <a href="{{ route('dashboard') }}" class="btn btn-primary">Back to files</a>
+            <a href="{{ route('dashboard') }}" class="btn btn-outline-primary">Back to files</a>
         </x-forms-footer>
     </form>
 </x-form-container>

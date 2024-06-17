@@ -41,7 +41,7 @@
         </x-form-wrapper>
         <x-forms-footer>
             <button type="submit" class="btn btn-primary">Create Question</button>
-            <a href="{{ route('forum') }}" class="btn btn-primary">Back to forum</a>
+            <a href="{{ route('forum') }}" class="btn btn-outline-primary">Back to forum</a>
         </x-forms-footer>
     </form>
     

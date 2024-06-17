@@ -1,4 +1,4 @@
-<x-alert\>
+<x-alert></x-alert>
 @if ($comments->count() > 0)
 <x-comment-section>
         <x-cards>
