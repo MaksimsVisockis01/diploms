@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    <ul class="nav nav-tabs mt-5" id="tableTabs" role="tablist">
+    {{-- <ul class="nav nav-tabs mt-5" id="tableTabs" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="usersTable-tab" data-bs-toggle="tab" href="#usersTable" role="tab" aria-controls="usersTable" aria-selected="true">Users</a>
         </li>
@@ -77,7 +77,7 @@
 
     <div class="tab-content mt-3" id="tableTabsContent">
         <div class="tab-pane fade show active" id="usersTable" role="tabpanel" aria-labelledby="usersTable-tab">
-            {{-- @include('admin.users.usercontrol') --}}
+            @include('admin.users.usercontrol')
         </div>
         <div class="tab-pane fade" id="filesTable" role="tabpanel" aria-labelledby="filesTable-tab">
             
@@ -88,7 +88,7 @@
         <div class="tab-pane fade" id="commentsTable" role="tabpanel" aria-labelledby="commentsTable-tab">
             
         </div>
-    </div>
+    </div> --}}
 </x-form-75-container>
 @endsection
 
