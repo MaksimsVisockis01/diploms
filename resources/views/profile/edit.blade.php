@@ -28,6 +28,7 @@
                         <div class="mb-3">
                             <label for="avatar" class="form-label">Avatar</label>
                             <input type="file" name="avatar" id="avatar" class="form-control @error('avatar') is-invalid @enderror">
+                            <small class="form-text text-muted">Only JPEG, JPG and PNG files are allowed. Maximum size: 8MB.</small>
                             @error('avatar')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

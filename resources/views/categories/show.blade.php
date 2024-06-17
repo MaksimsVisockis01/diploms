@@ -52,15 +52,27 @@
                                 <a href="{{ route('question.show', $item['data']->id) }}" class="btn btn-primary">View Question</a>
                             </li>
                         @elseif($item['type'] === 'file')
-                            <li class="list-group-item">
-                                <h5 class="text-truncate" style="max-width: 200px;">{{ $item['data']->title }}</h5>
-                                <p>{{ $item['data']->description }}</p>
-                                <p><strong>Author:</strong> {{ $item['data']->user->name }}</p>
-                                <a href="{{ asset('storage/files/' . $item['data']->file_path) }}" class="btn btn-outline-primary text-truncate" style="max-width: 200px;" target="_blank" title="{{ $item['data']->file_path }}">
-                                    {{ $item['data']->file_path }}
-                                </a>
-                            </li>
+                            @if(auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isTeacher()))
+                                <li class="list-group-item">
+                                    <h5 class="text-truncate" style="max-width: 200px;">{{ $item['data']->title }}</h5>
+                                    <p>{{ $item['data']->description }}</p>
+                                    <p><strong>Author:</strong> {{ $item['data']->user->name }}</p>
+                                    <a href="{{ asset('storage/files/' . $item['data']->file_path) }}" class="btn btn-outline-primary text-truncate" style="max-width: 200px;" target="_blank" title="{{ $item['data']->file_path }}">
+                                        {{ $item['data']->file_path }}
+                                    </a>
+                                </li>
+                            @else
+                                <li class="list-group-item">
+                                    <h5 class="text-truncate" style="max-width: 200px;">{{ $item['data']->title }}</h5>
+                                    <p>{{ $item['data']->description }}</p>
+                                    <p><strong>Author:</strong> {{ $item['data']->user->name }}</p>
+                                    <a href="{{ route('register') }}" class="btn btn-outline-primary text-truncate" style="max-width: 200px;" title="{{ $item['data']->file_path }}">
+                                        {{ $item['data']->file_path }}
+                                    </a>
+                                </li>
+                            @endif
                         @endif
+                        
                     </div>
                 </div>
             </div>

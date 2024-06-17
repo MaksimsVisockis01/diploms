@@ -21,6 +21,17 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-/* .btn-primary{
-    
+.custom-link:hover {
+    background-color: #007bff;
+    color: #ffffff !important;
+}
+.btn-edit{
+    background-color: #FB8B24 !important;
+    border-color: #FB8B24 !important;
+    color: #ffffff !important;
+}
+/* .btn-warning {
+    background-color: #FB8B24 !important;
+    border-color: #FB8B24 !important;
+    color: #ffffff !important; 
 } */

@@ -48,7 +48,6 @@
         @endforeach
     </div>
     
-    <!-- Pagination Links -->
     @if ($categories->lastPage() > 1)
         <div class="d-flex justify-content-between align-items-center mt-4">
             <nav>

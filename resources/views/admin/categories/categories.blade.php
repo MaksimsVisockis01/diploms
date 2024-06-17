@@ -60,7 +60,7 @@
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
-                                <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-primary">Edit Category</a>
+                                <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-warning">Edit Category</a>
                             </td>
                         </tr>
                     @endforeach

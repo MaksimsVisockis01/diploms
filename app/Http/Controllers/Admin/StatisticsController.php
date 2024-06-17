@@ -73,6 +73,13 @@ class StatisticsController extends Controller
             ->get()
             ->toArray();
 
-        return view('admin.statistics.index', compact('userStats', 'fileStats', 'questionStats', 'commentStats', 'dateFilter', 'date', 'intervals'));
+        // Подсчет общего количества записей
+        $totalUsers = User::where('admin', false)->count();
+        $totalFiles = File::count();
+        $totalQuestions = Question::count();
+        $totalComments = Question_Comment::count();
+
+        return view('admin.statistics.index', compact('userStats', 'fileStats', 'questionStats', 'commentStats', 'dateFilter', 'date', 'intervals', 'totalUsers', 'totalFiles', 'totalQuestions', 'totalComments'));
     }
 }
+

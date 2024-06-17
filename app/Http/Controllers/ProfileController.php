@@ -53,10 +53,11 @@ class ProfileController extends Controller
 
         $request->validate([
             'uid' => 'required|string|max:255|unique:users,uid,' . $user->id,
-            'avatar' => 'nullable|image|max:8192', // max 8MB
+            'avatar' => 'nullable|image|mimes:jpg,jpeg,png|max:8192',
             'password' => 'nullable|string|min:8|confirmed',
             'current_password' => 'required_with:password',
         ]);
+        
 
         if ($request->hasFile('avatar')) {
             $avatarPath = $request->file('avatar')->store('avatars', 'public');
