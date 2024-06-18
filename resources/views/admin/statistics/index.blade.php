@@ -65,10 +65,12 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            const userStats = @json($userStats);
             const fileStats = @json($fileStats);
             const questionStats = @json($questionStats);
             const commentStats = @json($commentStats);
 
+            const totalUsers = @json($totalUsers);
             const totalFiles = @json($totalFiles);
             const totalQuestions = @json($totalQuestions);
             const totalComments = @json($totalComments);
@@ -77,8 +79,15 @@
             const combinedChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: fileStats.map(item => item.date),
+                    labels: userStats.map(item => item.date),
                     datasets: [
+                        {
+                            label: 'Users',
+                            data: userStats.map(item => item.count),
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        },
                         {
                             label: 'Files',
                             data: fileStats.map(item => item.count),
@@ -111,21 +120,23 @@
                 }
             });
 
-            const ctxTotalStats = document.getElementById('totalStatsChartCanvas').getContext('2d');
-            const totalStatsChart = new Chart(ctxTotalStats, {
+            const totalCtx = document.getElementById('totalStatsChartCanvas').getContext('2d');
+            const totalStatsChart = new Chart(totalCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Total Files', 'Total Questions', 'Total Comments'],
+                    labels: ['Users', 'Files', 'Questions', 'Comments'],
                     datasets: [
                         {
                             label: 'Total Count',
-                            data: [totalFiles, totalQuestions, totalComments],
+                            data: [totalUsers, totalFiles, totalQuestions, totalComments],
                             backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',
                                 'rgba(153, 102, 255, 0.2)',
                                 'rgba(255, 159, 64, 0.2)',
                                 'rgba(75, 192, 192, 0.2)'
                             ],
                             borderColor: [
+                                'rgba(54, 162, 235, 1)',
                                 'rgba(153, 102, 255, 1)',
                                 'rgba(255, 159, 64, 1)',
                                 'rgba(75, 192, 192, 1)'
@@ -144,16 +155,24 @@
             });
 
             document.getElementById('downloadPdf').addEventListener('click', function () {
-                const chartsContainer = document.getElementById('chartTabsContent');
-                html2canvas(chartsContainer).then(function (canvas) {
-                    const imgData = canvas.toDataURL('image/png');
-                    const pdf = new jsPDF();
-                    const imgProps = pdf.getImageProperties(imgData);
-                    const pdfWidth = pdf.internal.pageSize.getWidth();
-                    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-                    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-                    pdf.save('charts.pdf');
-                });
+                const activeTabId = document.querySelector('.nav-tabs .nav-link.active').id;
+                let canvasId;
+                switch (activeTabId) {
+                    case 'timeSeriesChart-tab':
+                        canvasId = 'combinedChart';
+                        break;
+                    case 'totalStatsChart-tab':
+                        canvasId = 'totalStatsChartCanvas';
+                        break;
+                }
+
+                const canvas = document.getElementById(canvasId);
+                const canvasImage = canvas.toDataURL('image/png', 1.0);
+                const pdf = new jsPDF('landscape');
+                pdf.setFontSize(20);
+                pdf.text(15, 15, "Statistics Report");
+                pdf.addImage(canvasImage, 'PNG', 10, 10, 280, 150);
+                pdf.save('statistics.pdf');
             });
         });
     </script>
