@@ -17,30 +17,30 @@ class StatisticsController extends Controller
     {
         $dateFilter = $request->input('date_filter', 'daily');
         $date = $request->input('date');
-        $intervals = $request->input('intervals', 7); // Default to 7 intervals
+        $intervals = $request->input('intervals', 7); 
         $currentDate = Carbon::parse($date ?: Carbon::now());
 
         switch ($dateFilter) {
             case 'weekly':
                 $startDate = $currentDate->copy()->subWeeks($intervals)->startOfWeek();
                 $endDate = $currentDate->endOfWeek();
-                $dateFormat = '%Y-%u'; // Weekly format
+                $dateFormat = '%Y-%u'; 
                 break;
             case 'monthly':
                 $startDate = $currentDate->copy()->subMonths($intervals)->startOfMonth();
                 $endDate = $currentDate->endOfMonth();
-                $dateFormat = '%Y-%m'; // Monthly format
+                $dateFormat = '%Y-%m'; 
                 break;
             case 'yearly':
                 $startDate = $currentDate->copy()->subYears($intervals)->startOfYear();
                 $endDate = $currentDate->endOfYear();
-                $dateFormat = '%Y'; // Yearly format
+                $dateFormat = '%Y'; 
                 break;
             case 'daily':
             default:
                 $startDate = $currentDate->copy()->subDays($intervals)->startOfDay();
                 $endDate = $currentDate->endOfDay();
-                $dateFormat = '%Y-%m-%d'; // Daily format
+                $dateFormat = '%Y-%m-%d';
                 break;
         }
 
@@ -73,13 +73,17 @@ class StatisticsController extends Controller
             ->get()
             ->toArray();
 
-        // Подсчет общего количества записей
         $totalUsers = User::where('admin', false)->count();
         $totalFiles = File::count();
         $totalQuestions = Question::count();
         $totalComments = Question_Comment::count();
 
-        return view('admin.statistics.index', compact('userStats', 'fileStats', 'questionStats', 'commentStats', 'dateFilter', 'date', 'intervals', 'totalUsers', 'totalFiles', 'totalQuestions', 'totalComments'));
+        return view('admin.statistics.index', compact(
+            'userStats', 'fileStats', 'questionStats', 'commentStats', 
+            'dateFilter', 'date', 'intervals', 
+            'totalUsers', 'totalFiles', 'totalQuestions', 'totalComments',
+            
+        ));
     }
 }
 

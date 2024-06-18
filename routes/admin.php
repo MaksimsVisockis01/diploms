@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ManageFileController;
 use App\Http\Controllers\Admin\ManageUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Admin\UsersController;
@@ -19,6 +20,8 @@ Route::middleware('active')->group(function () {
             Route::put('/user/{user}/toggle-teacher', [ManageUserController::class, 'toggleTeacher'])->name('users.toggle-teacher');
             Route::put('/user/{user}/toggle-active', [ManageUserController::class, 'toggleActive'])->name('users.toggle-active');
 
+            // Route::get('filecontrol', [ManageFileController::class, 'filecontrol'])->name('admin.filecontrol');
+
             Route::get('categories', [CategoryController::class, 'index'])->name('admin.categories.index');
             Route::delete('categories/{category_id}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
             
@@ -28,9 +31,9 @@ Route::middleware('active')->group(function () {
             Route::put('category/{category_id}', [CategoryController::class, 'update'])->name('admin.category.update');
 
             Route::get('/admin/statistics', [App\Http\Controllers\Admin\StatisticsController::class, 'index'])->name('admin.statistics');
-            Route::delete('/admin/statistics/questionscontrol/{id}', [App\Http\Controllers\Admin\StatisticsController::class, 'deleteQuestion'])->name('admin.questionscontrol.delete');
-            Route::delete('/admin/statistics/commentscontrol/{id}', [App\Http\Controllers\Admin\StatisticsController::class, 'deleteComment'])->name('admin.commentscontrol.delete');
-            Route::delete('/admin/statistics/filescontrol/{id}', [App\Http\Controllers\Admin\StatisticsController::class, 'deleteFile'])->name('admin.filescontrol.delete');
+            // Route::delete('/admin/statistics/questioncontrol/{id}', [App\Http\Controllers\Admin\StatisticsController::class, 'deleteQuestion'])->name('admin.questionscontrol.delete');
+            // Route::delete('/admin/statistics/commentcontrol/{id}', [App\Http\Controllers\Admin\StatisticsController::class, 'deleteComment'])->name('admin.commentscontrol.delete');
+            // Route::delete('/admin/statistics/filecontrol/{id}', [App\Http\Controllers\Admin\StatisticsController::class, 'deleteFile'])->name('admin.filescontrol.delete');
         });
     });
 });

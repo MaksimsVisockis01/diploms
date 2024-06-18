@@ -28,9 +28,9 @@
                         <li><a class="dropdown-item" href="{{ route('categories.index') }}">All Categories</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('broadcast.index') }}">Broadcasting</a>
-                </li>
+                </li> --}}
                 {{-- <li class="nav-item dropdown">
                     <div class="dropdown">
                         <form class="d-flex">
@@ -65,7 +65,8 @@
                             <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">Pending users Ctrl</a></li>
                             <li><a class="dropdown-item" href="{{ route('admin.users.usercontrol') }}">Manage users</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                
+                            {{-- <li><a class="dropdown-item" href="{{ route('admin.filecontrol') }}">Manage files</a></li>
+                                <li><hr class="dropdown-divider"></li> --}}
                             <li><a class="dropdown-item" href="{{ route('admin.categories.index') }}">Categories Ctrl</a></li>
                                 <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{{ route('admin.statistics') }}">Statistics</a></li>

@@ -59,48 +59,16 @@
             </div>
         </div>
     </div>
-
-    {{-- <ul class="nav nav-tabs mt-5" id="tableTabs" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="usersTable-tab" data-bs-toggle="tab" href="#usersTable" role="tab" aria-controls="usersTable" aria-selected="true">Users</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="filesTable-tab" data-bs-toggle="tab" href="#filesTable" role="tab" aria-controls="filesTable" aria-selected="false">Files</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="questionsTable-tab" data-bs-toggle="tab" href="#questionsTable" role="tab" aria-controls="questionsTable" aria-selected="false">Questions</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="commentsTable-tab" data-bs-toggle="tab" href="#commentsTable" role="tab" aria-controls="commentsTable" aria-selected="false">Comments</a>
-        </li>
-    </ul>
-
-    <div class="tab-content mt-3" id="tableTabsContent">
-        <div class="tab-pane fade show active" id="usersTable" role="tabpanel" aria-labelledby="usersTable-tab">
-            @include('admin.users.usercontrol')
-        </div>
-        <div class="tab-pane fade" id="filesTable" role="tabpanel" aria-labelledby="filesTable-tab">
-            
-        </div>
-        <div class="tab-pane fade" id="questionsTable" role="tabpanel" aria-labelledby="questionsTable-tab">
-            
-        </div>
-        <div class="tab-pane fade" id="commentsTable" role="tabpanel" aria-labelledby="commentsTable-tab">
-            
-        </div>
-    </div> --}}
 </x-form-75-container>
 @endsection
 
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const userStats = @json($userStats);
             const fileStats = @json($fileStats);
             const questionStats = @json($questionStats);
             const commentStats = @json($commentStats);
 
-            const totalUsers = @json($totalUsers);
             const totalFiles = @json($totalFiles);
             const totalQuestions = @json($totalQuestions);
             const totalComments = @json($totalComments);
@@ -109,15 +77,8 @@
             const combinedChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: userStats.map(item => item.date),
+                    labels: fileStats.map(item => item.date),
                     datasets: [
-                        {
-                            label: 'Users',
-                            data: userStats.map(item => item.count),
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        },
                         {
                             label: 'Files',
                             data: fileStats.map(item => item.count),
@@ -154,19 +115,17 @@
             const totalStatsChart = new Chart(ctxTotalStats, {
                 type: 'bar',
                 data: {
-                    labels: ['Total Users', 'Total Files', 'Total Questions', 'Total Comments'],
+                    labels: ['Total Files', 'Total Questions', 'Total Comments'],
                     datasets: [
                         {
                             label: 'Total Count',
-                            data: [totalUsers, totalFiles, totalQuestions, totalComments],
+                            data: [totalFiles, totalQuestions, totalComments],
                             backgroundColor: [
-                                'rgba(54, 162, 235, 0.2)',
                                 'rgba(153, 102, 255, 0.2)',
                                 'rgba(255, 159, 64, 0.2)',
                                 'rgba(75, 192, 192, 0.2)'
                             ],
                             borderColor: [
-                                'rgba(54, 162, 235, 1)',
                                 'rgba(153, 102, 255, 1)',
                                 'rgba(255, 159, 64, 1)',
                                 'rgba(75, 192, 192, 1)'
